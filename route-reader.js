@@ -1,33 +1,84 @@
 /* eslint no-console: 0 */
-const app = require(`./${process.argv[2]}`); // eslint-disable-line import/no-dynamic-require
-const http = require('http');
-const fs = require('fs');
+/* eslint no-underscore-dangle: 0 */
+/* eslint import/no-dynamic-require: 0 */
 
 const PORT = process.env.TEST_PORT || 8080;
 const logDestination = process.env.TEST_DESTINATION || 'responses.json';
 
-const paths = app._router.stack // eslint-disable-line no-underscore-dangle
-  .filter(layer => layer.route)
-  .map(layer => layer.route.path);
+const http = require('http');
+const fs = require('fs');
+const logger = require('global-request-logger');
+const findExpressRoutes = require('./find-express-routes');
 
-const uniquePaths = [...new Set(paths)];
+// Require in server
+console.log(`loading ${process.argv[2]}`);
+const app = require(`./${process.argv[2]}`);
 
-http.createServer(app).listen(process.env.TEST_PORT || 8080);
+// Hang on to non-logging http.request
+const nativeRequest = http.request;
+
+// Initialize and configure global-request-logger (and fix http.get)
+logger.initialize();
+http.get = function get(url, options, cb) {
+  const req = http.request(url, options, cb);
+  req.end();
+  return req;
+};
+logger.on('success', (req) => {
+  console.log(`\tServer successfully requested ${req.href}`);
+});
+logger.on('error', (req) => {
+  console.log(`\tServer failed a request to ${req.href}`);
+});
+
+// Parse server's supported routes and methods
+console.log('Parsing routes...');
+const routes = findExpressRoutes(app._router.stack);
+console.log(routes);
+
+console.log(`Starting server on port ${PORT}...`);
+http.createServer(app).listen(PORT);
 
 const requests = [];
 
-uniquePaths.forEach((path) => {
-  requests.push(new Promise((resolve, reject) => {
-    http.get({ path, port: PORT }, (res) => {
-      const { headers, statusCode } = res;
-      resolve({ path, headers, statusCode });
-    }).on('error', err => reject(err));
-  }));
+// Run through every route and fire a request with every attached method
+console.log('Firing on all cylinders!');
+Object.keys(routes).forEach((path) => {
+  routes[path].forEach((method) => {
+    requests.push(new Promise((resolve, reject) => {
+      nativeRequest({ path, method, port: PORT }, (res) => {
+        const { headers, statusCode } = res;
+
+        let body = '';
+        res.on('data', (chunk) => {
+          body += chunk;
+        });
+
+        res.on('end', () => {
+          resolve({
+            path,
+            method,
+            headers,
+            statusCode,
+            body,
+          });
+        });
+      }).on('error', err => reject(err)).end();
+    }));
+  });
 });
 
+// Write all responses from the server to a file
 Promise.all(requests).then((responses) => {
   fs.writeFile(logDestination, JSON.stringify(responses, null, 2), (err) => {
-    if (err) console.error(err);
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(`Wrote to ${logDestination}`);
+    }
     process.exit();
   });
-}).catch(console.error);
+}).catch((error) => {
+  console.error(error);
+  process.exit();
+});
