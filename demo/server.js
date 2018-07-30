@@ -30,6 +30,9 @@ signup.post('/', someController.createUser, someController.login);
 app.route('/secret').get(someController.isLoggedIn, (req, res) => {
   res.send("Here's the secret page!");
 });
+app.route('/secret/:id').get((req, res) => {
+  res.send('Params are tracked too!');
+});
 
 app.listen(3000);
 
