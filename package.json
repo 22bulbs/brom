@@ -13,7 +13,7 @@
     "url": "git+https://github.com/tr00gle/webhead.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tr00gle/webhead/issues"
   },
@@ -31,6 +31,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "global-request-logger": "^0.1.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3"
