@@ -3,6 +3,10 @@ const express = require('express');
 const someController = {
   setCookie: function setCookie(req, res, next) {
     res.cookie('Just-a', 'cookie!');
+    res.cookie('Also-a', 'cookie!', {
+      httpOnly: true,
+      maxAge: 900000,
+    });
     next();
   },
 
