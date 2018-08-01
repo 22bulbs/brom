@@ -1,0 +1,63 @@
+{
+  "request": {
+    "url": "/test",
+    "method": "GET",
+    "headers": {
+      "content-type": "application/json",
+      "content-length": "23"
+    },
+    "body": "data",
+    "cookies": [{
+        "name": "name",
+        "value": "value",
+        "expires": "Wed, 01 Aug 2018 01:55:15 GMT"
+      },
+      {
+        "name": "name2",
+        "value": "value",
+        "expires": "Wed, 01 Aug 2018 02:55:15 GMT"
+      }
+    ],
+    "api": "fetch",
+    "external": "false"
+  },
+  "response": {
+    "url": "/test",
+    "method": "GET",
+    "statusCode": "200",
+    "headers": {
+      "x-powered-by": "Express",
+      "content-type": "application/json",
+      "content-length": "23"
+    },
+    "body": "data",
+    "cookies": [{
+      "name": "bad",
+      "value": "true",
+      "Path": "/"
+    }],
+    "contentSecurityPolicy": {
+      "default-src": [
+        "'self'"
+      ],
+      "img-src": [
+        "*"
+      ],
+      "media-src": [
+        "media1.com",
+        "media2.com"
+      ],
+      "script-src": [
+        "userscripts.example.com"
+      ]
+    },
+    "featurePolicy": {
+      "camera": [
+        "https://other.com"
+      ],
+      "microphone": [
+        "https://other.com"
+      ]
+    }
+  }
+}
