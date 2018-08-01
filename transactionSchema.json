@@ -3,7 +3,7 @@
     "url": "/test",
     "method": "GET",
     "api": "fetch",
-    "external": "false",
+    "external": false,
     "flags": [
       "severe",
       "deprecated",
@@ -34,14 +34,14 @@
     ]
   },
   "response": {
-    "statusCode": "200",
+    "statusCode": 200,
     "headers": {
       "x-powered-by": "Express",
       "content-type": "application/json",
       "content-length": "23"
     },
     "body": "data",
-    "cookies": [
+    "setCookie": [
       {
         "name": "bad",
         "value": "true",
