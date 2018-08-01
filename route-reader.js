@@ -9,6 +9,7 @@ const fs = require('fs');
 const findExpressRoutes = require('./find-express-routes');
 const addRequestListeners = require('./add-request-listeners');
 const requestAll = require('./request-all');
+const axios = require('axios');
 const { shake } = require('./utils');
 
 // Require in server
@@ -41,10 +42,7 @@ console.log(normalPaths);
 console.log('Ignoring parameterized paths:');
 console.log(paramPaths);
 
-// Run through every route and fire a request with every attached method
-console.log('Requesting now...');
-requestAll(normalPaths, routes, PORT, nativeRequest)
-  .then((responses) => {
+const writeToFile = (responses) => {
     // Write all responses from the server to a file
     const results = {
       deferred: paramPaths,
@@ -59,7 +57,30 @@ requestAll(normalPaths, routes, PORT, nativeRequest)
       }
       process.exit();
     });
-  })
+  }
+
+  const sendToServer = (responses) => {
+    console.log(process.env.WEBHEAD_USER_PORT);
+    axios.post('http://localhost:7913/results', responses)
+      .then(res => console.log('success??'))
+      .catch(err => console.error('fuck!!!!'));
+    // http.request({
+    //   method: 'POST',
+    //   port: 7913,//make env variable for our port
+    //   body: JSON.stringify(responses),
+    //   path: '/results',
+    //   headers: {'Content-Type': 'application/json'}
+    // }, (response) => {
+    //   console.log('response?');
+    // }).on('error', error => console.log('Couldn\'t post to server', error))
+  }
+
+
+// Run through every route and fire a request with every attached method
+console.log('Requesting now...');
+
+requestAll(normalPaths, routes, PORT, nativeRequest)
+  .then(sendToServer)
   .catch((error) => {
     console.error(error);
     process.exit();

@@ -10,15 +10,15 @@ const app = express();
 
 app.use('/routers', someRouter);
 
-app.get('/', (req, res, next) => next());
-app.get('/', someController.setCookie, (req, res) => {
-  res.send("Here's the home page!");
-});
+// app.get('/', someController.setCookie);
+app.use(express.static(__dirname + '/client'));
+
 app.post('/', (req, res) => {
   res.cookie('bad', 'true');
   res.send("Don't post here!");
 });
 app.post('/login', someController.verifyUser, someController.login);
+app.get('/api', (req, res) => res.json('hi from the api route'))
 
 const signup = express.Router();
 app.use('/signup', signup);
