@@ -1,13 +1,27 @@
 {
-  "request": {
+  "metadata": {
     "url": "/test",
     "method": "GET",
+    "api": "fetch",
+    "external": "false",
+    "flags": [
+      "severe",
+      "deprecated",
+      "redundant",
+      "conflicting",
+      "csp",
+      "fp",
+      "body"
+    ]
+  },
+  "request": {
     "headers": {
       "content-type": "application/json",
       "content-length": "23"
     },
     "body": "data",
-    "cookies": [{
+    "cookies": [
+      {
         "name": "name",
         "value": "value",
         "expires": "Wed, 01 Aug 2018 01:55:15 GMT"
@@ -17,13 +31,9 @@
         "value": "value",
         "expires": "Wed, 01 Aug 2018 02:55:15 GMT"
       }
-    ],
-    "api": "fetch",
-    "external": "false"
+    ]
   },
   "response": {
-    "url": "/test",
-    "method": "GET",
     "statusCode": "200",
     "headers": {
       "x-powered-by": "Express",
@@ -31,11 +41,13 @@
       "content-length": "23"
     },
     "body": "data",
-    "cookies": [{
-      "name": "bad",
-      "value": "true",
-      "Path": "/"
-    }],
+    "cookies": [
+      {
+        "name": "bad",
+        "value": "true",
+        "Path": "/"
+      }
+    ],
     "contentSecurityPolicy": {
       "default-src": [
         "'self'"
@@ -57,6 +69,21 @@
       ],
       "microphone": [
         "https://other.com"
+      ]
+    }
+  },
+  "warnings": {
+    "req": {},
+    "res": {
+      "general": [
+        "Redundant headers."
+      ],
+      "content-security-policy": [
+        "No CSP in place."
+      ],
+      "feature-policy": [
+        "some warning",
+        "a second warning"
       ]
     }
   }
