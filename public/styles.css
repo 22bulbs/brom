@@ -8,6 +8,10 @@
   flex-direction: column;
 }
 
+.flex-row{
+  display: flex;
+}
+
 #main-container {
   display: flex;
 }
