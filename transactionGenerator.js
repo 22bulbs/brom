@@ -1,16 +1,6 @@
 const { parseHeaders } = require('./parse-headers');
 const sampleRules = require('./sample-rules');
 
-const sampleHeaders = {
-  'x-powered-by': 'Express',
-  location: '/',
-  vary: 'Accept',
-  'content-type': 'text/html; charset=utf-8',
-  'content-length': '23',
-  date: 'Thu, 02 Aug 2018 00:14:35 GMT',
-  connection: 'close',
-};
-
 const applyRules = (rules, { headers }, type) => {
   const output = {
     warnings: {},
@@ -92,6 +82,4 @@ const transactionGenerator = (raw) => {
 };
 
 module.exports = transactionGenerator;
-
-// console.log(applyRules(sampleRules, { headers: sampleHeaders }));
 
