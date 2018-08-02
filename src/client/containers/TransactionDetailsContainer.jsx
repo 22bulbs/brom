@@ -23,7 +23,7 @@ export default class TransactionDetailsContainer extends Component {
       <div id='transaction-details-container'>
         <DetailsRequestContainer />
         <DetailsResponseContainer />
-      </div>
+      </div>  
     )
   }
 }

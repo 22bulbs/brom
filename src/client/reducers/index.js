@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { transactionsReducer, transactionMethodFilterReducer } from './transactionsReducer.js';
+const reducersFile = require('./transactionsReducer');
 
 const reducers = combineReducers({
-  transactions: transactionsReducer,
-  transactionMethodFilter: transactionMethodFilterReducer
+  transactions: reducersFile.transactionsReducer,
+  transactionMethodFilter: reducersFile.transactionMethodFilterReducer
 })
 
 export default reducers;
