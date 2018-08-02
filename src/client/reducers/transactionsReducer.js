@@ -3,7 +3,7 @@ const sampleData = require('../../../sampleData');
 
 const initialState = {
   transactions: sampleData,
-  selectedTransaction: {},
+  selectedTransactionIndex: 0,
   transactionMethodFilter: ''
   // transactionApiFilter: '',
   // transactionFlagFilter: '',
@@ -41,15 +41,10 @@ const transactionsReducer = (state = initialState.transactions, action) => {
   }
 }
 
-const selectedTransactionReducer = (state = initialState, action) => {
+const selectedTransactionIndexReducer = (state = initialState.selectedTransactionIndex, action) => {
   switch (action.type) {
     case SELECT_TRANSACTION:
-      const index = action.transactionIndex;
-      let { transactions } = state
-      return ({ 
-        ...state,
-        selectedTransaction: index >= 0 ? transactions[index] : {}
-      });
+      return action.transactionIndex
     default:
       return state;
   }
@@ -68,7 +63,7 @@ const transactionMethodFilterReducer = (state = initialState.transactionMethodFi
 module.exports = {
   transactionsReducer,
   transactionMethodFilterReducer,
-  selectedTransactionReducer
+  selectedTransactionIndexReducer
 }
 
 
