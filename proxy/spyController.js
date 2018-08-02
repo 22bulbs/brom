@@ -1,6 +1,7 @@
 const request = require('request');
 const axios = require('axios');
 
+
 const transactionGenerator = require('../transactionGenerator.js');
 const spyController = {};
 
@@ -34,6 +35,7 @@ spyController.redirect = (req, res, next) => {
     url = req.headers.origin + req.body.url;
   } else {
     url = req.body.url;
+
     res.locals.transaction.metadata.external = true;
   }
   console.log('request headers are', req.headers);
@@ -60,6 +62,7 @@ spyController.redirect = (req, res, next) => {
     .then(response => {
       console.log('response header is ', response.headers);
       res.locals.transaction.response.headers = response.headers;
+
       res.locals.transaction.response.body = response.data; 
       res.locals.transaction.response.statusCode = response.status;
       //set all headers from response to destination in response to client
@@ -73,6 +76,7 @@ spyController.redirect = (req, res, next) => {
     })
     .catch(error => console.log(error))
 }
+
 
 spyController.generateTransaction = (req, res, next) => {
   res.locals.transaction = transactionGenerator(res.locals.transaction);

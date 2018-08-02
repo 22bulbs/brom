@@ -20,6 +20,7 @@ app.post('/', (req, res) => {
   res.send("Don't post here!");
 });
 app.post('/login', someController.verifyUser, someController.login);
+
 app.get('/api', (req, res) => {
 	res.cookie('testcookie','test value')
 	res.json('hi from the api route')
