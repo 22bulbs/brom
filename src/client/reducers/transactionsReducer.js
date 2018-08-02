@@ -44,10 +44,11 @@ const transactionsReducer = (state = initialState.transactions, action) => {
 const selectedTransactionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SELECT_TRANSACTION:
+      const index = action.transactionIndex;
       let { transactions } = state
       return ({ 
         ...state,
-        selectedTransaction: transactions[action.transactionIndex]
+        selectedTransaction: index >= 0 ? transactions[index] : {}
       });
     default:
       return state;
@@ -67,7 +68,7 @@ const transactionMethodFilterReducer = (state = initialState.transactionMethodFi
 module.exports = {
   transactionsReducer,
   transactionMethodFilterReducer,
-  // selectedTransactionReducer
+  selectedTransactionReducer
 }
 
 
