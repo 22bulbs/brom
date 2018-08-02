@@ -20,12 +20,12 @@ export default class MainContainer extends Component {
 
   render() {
     return (
-      <div id='mainContainer'>
-        <div className='flex-column'>
+      <div id='main-container'>
+        <div className='flex-column' id='left-hand-side'>
           <AuditResultsSummary />
           <TransactionListContainer />
         </div>
-        <div className='flex-column'>
+        <div className='flex-column' id='right-hand-side'>
           <DetailsTransactionSummary />
           <TransactionDetailsContainer />
         </div>

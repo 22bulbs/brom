@@ -17,7 +17,7 @@ export default class DetailsResponseContainer extends Component {
 
   render() {
     return (
-      <div id='detailsResponseTitle'>
+      <div className='flex-column' id='details-response-container'>
         Response
       </div>
     )

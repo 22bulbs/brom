@@ -20,7 +20,7 @@ export default class TransactionDetailsContainer extends Component {
 
   render(){
     return(
-      <div id='transactionDetailsContainer'>
+      <div id='transaction-details-container'>
         <DetailsRequestContainer />
         <DetailsResponseContainer />
       </div>
