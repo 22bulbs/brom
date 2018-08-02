@@ -62,17 +62,8 @@ const writeToFile = (responses) => {
   const sendToServer = (responses) => {
     console.log(process.env.WEBHEAD_USER_PORT);
     axios.post('http://localhost:7913/results', responses)
-      .then(res => console.log('success??'))
-      .catch(err => console.error('fuck!!!!'));
-    // http.request({
-    //   method: 'POST',
-    //   port: 7913,//make env variable for our port
-    //   body: JSON.stringify(responses),
-    //   path: '/results',
-    //   headers: {'Content-Type': 'application/json'}
-    // }, (response) => {
-    //   console.log('response?');
-    // }).on('error', error => console.log('Couldn\'t post to server', error))
+
+      .catch(err => console.error('cannot post to results server', err));
   }
 
 

@@ -26,6 +26,7 @@ app.get('/report',
 app.post('/report', 
 	spyController.report,
 	spyController.redirect,
+	spyController.generateTransaction,
 	spyController.postTransaction,
 	spyController.respond
 );

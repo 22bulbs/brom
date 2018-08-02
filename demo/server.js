@@ -2,6 +2,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 const express = require('express');
 const request = require('request');
+const cookieParser = require('cookie-parser')
 
 const someController = require('./controllers/someController');
 const someRouter = require('./routers/someRouter');
@@ -9,6 +10,7 @@ const someRouter = require('./routers/someRouter');
 const app = express();
 
 app.use('/routers', someRouter);
+app.use(cookieParser());
 
 // app.get('/', someController.setCookie);
 app.use(express.static(__dirname + '/client'));
@@ -18,7 +20,11 @@ app.post('/', (req, res) => {
   res.send("Don't post here!");
 });
 app.post('/login', someController.verifyUser, someController.login);
-app.get('/api', (req, res) => res.json('hi from the api route'))
+
+app.get('/api', (req, res) => {
+	res.cookie('testcookie','test value')
+	res.json('hi from the api route')
+})
 
 const signup = express.Router();
 app.use('/signup', signup);

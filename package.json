@@ -43,6 +43,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "socket.io": "^2.1.1"
   }
 }

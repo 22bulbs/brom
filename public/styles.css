@@ -1,0 +1,37 @@
+.App {
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#mainContainer {
+  display: flex;
+}
+
+#leftHandSide {
+  display: flex;
+  flex-direction: column;
+}
+
+#transactionListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#rightHandSide {
+  display: flex;
+  flex-direction: column;
+}
+
+#transactionDetailsContainer {
+  display: flex;
+}
+
+#detailsRequestContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#detailsResponseContainer {
+  display: flex;
+  flex-direction: column;
+}

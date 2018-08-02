@@ -1,22 +1,24 @@
 const request = require('request');
 const axios = require('axios');
 
+
+const transactionGenerator = require('../transactionGenerator.js');
 const spyController = {};
 
 spyController.report = (req, res, next) => {
+  console.log('check here for headers',req.body);
   res.locals.transaction = {
-    request:{
+    metadata: {
       url: req.body.url,
       method:req.body.options.method,
-      headers: req.body.options.headers,
-      body: req.body.data,
-      cookies: {},
       api: req.body.api,
       external: false,
     },
+    request:{
+      headers: req.body.options.headers,
+      body: req.body.data || "",      
+    },
     response:{
-      url: req.body.url,
-      method:req.body.options.method
     }
   }
   next();
@@ -33,7 +35,8 @@ spyController.redirect = (req, res, next) => {
     url = req.headers.origin + req.body.url;
   } else {
     url = req.body.url;
-    res.locals.transaction.request.external = true;
+
+    res.locals.transaction.metadata.external = true;
   }
   console.log('request headers are', req.headers);
   //if req contains cookies, send them with the headers to the destination
@@ -59,7 +62,9 @@ spyController.redirect = (req, res, next) => {
     .then(response => {
       console.log('response header is ', response.headers);
       res.locals.transaction.response.headers = response.headers;
-      res.locals.transaction.response.body = response.data;
+
+      res.locals.transaction.response.body = response.data; 
+      res.locals.transaction.response.statusCode = response.status;
       //set all headers from response to destination in response to client
       for (let header in response.headers) {
       	res.set(header, response.headers[header])
@@ -70,6 +75,12 @@ spyController.redirect = (req, res, next) => {
       console.log('\n \n \n \n \n \n \n \n \n \n');
     })
     .catch(error => console.log(error))
+}
+
+
+spyController.generateTransaction = (req, res, next) => {
+  res.locals.transaction = transactionGenerator(res.locals.transaction);
+  next();
 }
 
 spyController.postTransaction = (req, res, next) => {
