@@ -11,8 +11,8 @@ const axios = require('axios');
 const { shake } = require('./utils');
 
 // Require in server
-console.log(`examining ${process.argv[2]}`);
-const app = require(`./${process.argv[2]}`);
+console.log(`examining ${process.env.WEBHEAD_USER_SERVER}`);
+const app = require(process.env.WEBHEAD_USER_SERVER);
 
 // Initialize and configure global-request-logger
 const nativeRequest = http.request;
