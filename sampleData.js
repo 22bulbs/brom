@@ -354,4 +354,4 @@ const sampleData = [
 ]
 
 
-module.exports = {sampleData};
+module.exports = sampleData;
