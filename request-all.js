@@ -1,5 +1,5 @@
 const http = require('http');
-
+const transactionGenerator = require('./transactionGenerator')
 /**
  * Request along some set of paths, using an object detailing which methods to
  * use. This function is called after http.request has been overridden, so it
@@ -16,24 +16,36 @@ const http = require('http');
  * @returns {Promise} A Promise.all representing each request made
  */
 function requestAll(paths, methodMap, port, nativeRequest = http.request) {
+  console.log(paths, methodMap);
   const requests = [];
   paths.forEach((path) => {
     methodMap[path].forEach((method) => {
       requests.push(new Promise((resolve, reject) => {
         nativeRequest({ path, method, port }, (res) => {
-          const responseDetails = {
-            method,
-            path,
-            statusCode: res.statusCode,
-            headers: res.headers,
-            body: '',
-          };
-
+          let body = '';
           res.on('data', (chunk) => {
-            responseDetails.body += chunk;
+            body += chunk;
           });
 
-          res.on('end', () => resolve(responseDetails));
+          res.on('end', () => {
+            const rawTransaction = {
+              metadata: {
+                url: path,
+                method: method,
+                api: 'n/a',
+                external: false
+              },
+              request: {
+                headers: {}
+              },
+              response: {
+                headers: res.headers,
+                statusCode: res.statusCode,
+                body: body
+              }
+            }
+            resolve(transactionGenerator(rawTransaction))
+          });
         }).on('error', err => reject(err)).end();
       }));
     });
