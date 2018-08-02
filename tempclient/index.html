@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Webhead</title>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Webhead</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+  </head>
 
-<body>
-  <p id="render"></p>
-  <script type="text/javascript">
-  	const socket = io();
-  	socket.on('transaction', transaction => {
-  		document.getElementById('render').innerHTML += JSON.stringify(transaction);
-  	});
-  	socket.on('test', console.log)
-  	console.log(socket);
-  </script>
-</body>
+  <body>
+    <pre id="render"></pre>
+    <script type="text/javascript">
+      const socket = io();
+      socket.on('transaction', transaction => {
+        const display = document.getElementById('render');
+        const toInsert = transaction instanceof Array ? transaction : [];
+        const content = display.innerHTML ? JSON.parse(display.innerHTML).push(...transaction) : transaction;
+        display.innerHTML = JSON.stringify(content, null, 2);
+      });
+      socket.on('test', console.log)
+      console.log(socket);
+    </script>
+  </body>
 
 </html>
