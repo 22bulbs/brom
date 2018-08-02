@@ -58,20 +58,39 @@ function setCookie(serialized) {
   return cookie;
 }
 
+function cookie(serialized) {
+  const cookies = [];
+  serialized.split(';').forEach((pair) => {
+    const delimiter = pair.indexOf('=');
+    if (delimiter === -1) return;
+    cookies.push({
+      name: pair.slice(0, delimiter).trim(),
+      value: pair.slice(delimiter + 1).trim(),
+    });
+  });
+  return cookies;
+}
+
 function parseHeaders(headerSet) {
-  if (headerSet['set-cookie']) {
-    const toParse = headerSet['set-cookie'];
-    headerSet['set-cookie'] = toParse.map(setCookie);
-  }
-  if (headerSet['feature-policy']) {
-    const toParse = headerSet['feature-policy'];
-    headerSet['feature-policy'] = featurePolicy(toParse);
-  }
-  if (headerSet['content-security-policy']) {
-    const toParse = headerSet['content-security-policy'];
-    headerSet['content-security-policy'] = contentSecurityPolicy(toParse);
-  }
-  return headerSet;
+  const output = { headers: {} };
+  Object.keys(headerSet).forEach((header) => {
+    if (header === 'set-cookie') {
+      const toParse = headerSet['set-cookie'];
+      output.setCookie = toParse.map(setCookie);
+    } else if (header === 'feature-policy') {
+      const toParse = headerSet['feature-policy'];
+      output.featurePolicy = featurePolicy(toParse);
+    } else if (header === 'content-security-policy') {
+      const toParse = headerSet['content-security-policy'];
+      output.contentSecurityPolicy = contentSecurityPolicy(toParse);
+    } else if (header === 'cookie') {
+      const toParse = headerSet['cookie'];
+      output.cookies = cookie(toParse);
+    } else {
+      output.headers[header] = headerSet[header];
+    }
+  });
+  return output;
 }
 
 module.exports = parseHeaders;
