@@ -18,7 +18,7 @@ export default class TransactionListContainer extends Component {
 
   render() {
     return (
-      <div id='transactionListContainer'>
+      <div className='flex-column' id='transaction-list-container'>
         <TransactionFilterBar />
         <TransactionList />
       </div>
