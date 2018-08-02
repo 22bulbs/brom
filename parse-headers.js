@@ -73,25 +73,39 @@ function cookie(serialized) {
 
 function parseHeaders(headerSet) {
   const output = { headers: {} };
+
   Object.keys(headerSet).forEach((header) => {
-    if (header === 'set-cookie') {
-      const toParse = headerSet['set-cookie'];
-      output.setCookie = toParse.map(setCookie);
-    } else if (header === 'feature-policy') {
-      const toParse = headerSet['feature-policy'];
-      output.featurePolicy = featurePolicy(toParse);
-    } else if (header === 'content-security-policy') {
-      const toParse = headerSet['content-security-policy'];
-      output.contentSecurityPolicy = contentSecurityPolicy(toParse);
-    } else if (header === 'cookie') {
-      const toParse = headerSet['cookie'];
-      output.cookies = cookie(toParse);
-    } else {
-      output.headers[header] = headerSet[header];
+    let toParse;
+    switch (header) {
+      case 'set-cookie':
+        toParse = headerSet['set-cookie'];
+        output.setCookie = toParse.map(setCookie);
+        break;
+      case 'feature-policy':
+        toParse = headerSet['feature-policy'];
+        output.featurePolicy = featurePolicy(toParse);
+        break;
+      case 'content-security-policy':
+        toParse = headerSet['content-security-policy'];
+        output.contentSecurityPolicy = contentSecurityPolicy(toParse);
+        break;
+      case 'cookie':
+        toParse = headerSet['cookie'];
+        output.cookies = cookie(toParse);
+        break;
+      default:
+        output.headers[header] = headerSet[header];
     }
   });
+
   return output;
 }
 
-module.exports = parseHeaders;
+module.exports = {
+  parseHeaders,
+  contentSecurityPolicy,
+  cookie,
+  featurePolicy,
+  setCookie,
+};
 
