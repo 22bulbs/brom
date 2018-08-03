@@ -1,0 +1,9 @@
+node_modules/
+responses.json
+.DS_Store
+dist/
+
+
+# Sample data output
+responses.json
+
