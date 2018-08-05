@@ -9,19 +9,17 @@
   </head>
 
   <body>
-    <pre id="render">[]</pre>
+    <pre id="render"></pre>
     <script type="text/javascript">
+      const transactions = [];
       const socket = io();
       socket.on('transaction', transaction => {
-        const toInsert = Array.isArray(transaction)
-          ? transaction
-          : [transaction];
+        console.log('transaction received')
+        transactions.push(...[].concat(transaction));
 
         const display = document.getElementById('render');
-        const content = JSON.parse(display.innerHTML);
-        content.push(...toInsert);
 
-        display.innerHTML = JSON.stringify(content, null, 2);
+        display.innerHTML = JSON.stringify(transactions, null, 2);
       });
     </script>
   </body>
