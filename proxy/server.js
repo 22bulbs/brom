@@ -17,6 +17,15 @@ const app = express();
 // app.use(bodyparser.json());
 app.use(cookieParser());
 
+app.post('/p4bcxeq3jgp2jvsx2tobdhs7',
+  bodyparser.json(),
+  spyController.report,
+  spyController.redirect,
+  spyController.generateTransaction,
+  spyController.postTransaction,
+  spyController.respond
+)
+
 app.use('/', proxy)
 
 function makeTransform() {
