@@ -11,9 +11,17 @@ console.log(`examining ${process.env.WEBHEAD_USER_SERVER}`);
 const app = require(process.env.WEBHEAD_USER_SERVER);
 const port = process.env.WEBHEAD_USER_PORT;
 
+// Parse server's supported routes and methods
+let routes;
 try {
-  // Parse server's supported routes and methods
-  const routes = findExpressRoutes(app._router.stack);
+  routes = findExpressRoutes(app._router.stack);
+} catch (e) {
+  console.error(e.toString());
+  console.error(`Unable to launch automated requests against server. Make sure your express
+  app is a top-level export from the provided server file (module.exports = app)`);
+}
+
+if (routes) {
   const { paramPaths, normalPaths } = shake(Object.keys(routes), {
     paramPaths: route => route.match(/:[^/]+/),
     normalPaths: route => !route.match(/:[^/]+/),
@@ -36,8 +44,4 @@ try {
     .catch((error) => {
       console.error(error);
     });
-} catch (e) {
-  console.error(e.toString());
-  console.error(`Unable to launch automated requests against server. Make sure your express
-  app is a top-level export from the provided server file (module.exports = app)`);
 }
