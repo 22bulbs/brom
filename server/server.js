@@ -9,26 +9,17 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-const transactions = [];
+let transactions = [];
 
 app.use(express.static('tempclient'));
 app.use(express.static('dist'));
 app.use(bodyParser.json());
 
-app.get('/test', (req, res) => {
-  io.emit('transaction', { key: 'value' });
-
-  res.end();
-});
-
 app.post('/results', (req, res) => {
-  if (req.body instanceof Array) {
-    transactions.push(...req.body);
-  } else {
-    transactions.push(req.body);
-  }
+  transactions = transactions.concat(req.body);
 
   io.emit('transaction', req.body);
+  io.emit('test', 'hello');
 
   const destination = process.env.WEBHEAD_WRITE_DESTINATION;
   if (destination) {

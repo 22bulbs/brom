@@ -3,7 +3,7 @@ const xhrApi = () => {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
-      document.getElementById('render-box').textContent = xhr.responseText;
+      document.getElementById('render-box').textContent = JSON.parse(xhr.responseText);
     }
   }
   xhr.open('GET', '/api', true);
@@ -40,6 +40,14 @@ const axiosApi = () => {
     })
 }
 
+//Axios post request
+const axiosApiPost = () => {
+  axios.post('/api', { test: true })
+    .then(res => {
+      document.getElementById('render-box').textContent = res.data;
+    })
+}
+
 //JQuery get request
 const jQueryApi = () => {
   $.get('/api', data => {
@@ -52,5 +60,6 @@ window.onload = () => {
   document.getElementById('fetch-button').onclick = fetchApi;
   document.getElementById('fetch-external-button').onclick = fetchExternalApi;
   document.getElementById('axios-button').onclick = axiosApi;
+  document.getElementById('axios-button-post').onclick = axiosApiPost;
   document.getElementById('jquery-button').onclick = jQueryApi;
 };

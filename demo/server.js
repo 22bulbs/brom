@@ -3,6 +3,7 @@
 const express = require('express');
 const request = require('request');
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 const someController = require('./controllers/someController');
 const someRouter = require('./routers/someRouter');
@@ -11,6 +12,7 @@ const app = express();
 
 app.use('/routers', someRouter);
 app.use(cookieParser());
+app.use(bodyParser.json())
 
 // app.get('/', someController.setCookie);
 app.use(express.static(__dirname + '/client'));
@@ -22,8 +24,16 @@ app.post('/', (req, res) => {
 app.post('/login', someController.verifyUser, someController.login);
 
 app.get('/api', (req, res) => {
-	res.cookie('testcookie','test value')
+	// res.cookie('testcookie','test value')
 	res.json('hi from the api route')
+})
+
+app.post('/api', (req, res) => {
+  if (req.body.test === true) {
+    res.json('post is working')
+  } else {
+    res.json('nope')
+  }
 })
 
 const signup = express.Router();
