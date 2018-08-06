@@ -39,7 +39,6 @@
     "cookie-parser": "^1.4.3",
     "escape-html": "^1.0.3",
     "express": "^4.16.3",
-    "global-request-logger": "^0.1.1",
     "minimist": "^1.2.0",
     "opn": "^5.3.0",
     "react": "^16.4.1",
