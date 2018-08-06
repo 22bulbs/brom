@@ -4,11 +4,12 @@ import AuditResultsSummary from '../components/AuditResultsSummary.jsx';
 import TransactionDetailsContainer from './TransactionDetailsContainer.jsx';
 import TransactionListContainer from './TransactionListContainer.jsx';
 import DetailsTransactionSummary from '../components/DetailsTransactionSummary.jsx';
+import { addTransaction as action } from '../actions/actions';
 
 const mapStateToProps = store => store;
 
 const mapDispatchToProps = dispatch => ({
-  
+  addTransaction: requestName => dispatch(action.addTransaction(requestName))
 
 });
 
