@@ -16,7 +16,6 @@ const transactionGenerator = require('./transactionGenerator')
  * @returns {Promise} A Promise.all representing each request made
  */
 function requestAll(paths, methodMap, port, nativeRequest = http.request) {
-  console.log(paths, methodMap);
   const requests = [];
   paths.forEach((path) => {
     methodMap[path].forEach((method) => {
