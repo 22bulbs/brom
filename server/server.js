@@ -16,6 +16,7 @@ app.use(express.static('dist'));
 app.use(bodyParser.json());
 
 app.post('/results', (req, res) => {
+  console.log('received results');
   transactions = transactions.concat(req.body);
 
   io.emit('transaction', req.body);
