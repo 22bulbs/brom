@@ -4,12 +4,12 @@ import AuditResultsSummary from '../components/AuditResultsSummary.jsx';
 import TransactionDetailsContainer from './TransactionDetailsContainer.jsx';
 import TransactionListContainer from './TransactionListContainer.jsx';
 import DetailsTransactionSummary from '../components/DetailsTransactionSummary.jsx';
+import { addTransaction as action } from '../actions/actions';
 
-const mapStateToProps = store => ({
-
-});
+const mapStateToProps = store => store;
 
 const mapDispatchToProps = dispatch => ({
+  addTransaction: requestName => dispatch(action.addTransaction(requestName))
 
 });
 
@@ -19,6 +19,12 @@ export default class MainContainer extends Component {
   }
 
   render() {
+    const { transactions,
+            transactionMethodFilter,
+            selectedTransactionIndex,
+            transactionApiFilter,
+            transactionFlagFilter,
+            transactionDomainFilter } = this.props;
     return (
       <div id='main-container'>
         <div className='flex-column' id='left-hand-side'>
@@ -35,3 +41,4 @@ export default class MainContainer extends Component {
   }
 }
 
+connect(mapStateToProps, mapDispatchToProps)(MainContainer)
