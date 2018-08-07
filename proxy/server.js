@@ -6,12 +6,20 @@ const cookieParser = require('cookie-parser');
 const request = require('request');
 const axios = require('axios');
 const escapeHTML = require('escape-html');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 const spyController = require('./spyController');
 const makeScriptInjector = require('./make-script-injector');
 
 const app = express();
 const PORT = 9999;
+const protocol = process.env.WEBHEAD_USE_HTTPS ? 'https' : 'http';
+const certOptions = {
+  key: fs.readFileSync(path.resolve('../httpsSample/server.key')),// this is bad, fix once config is set up to make this work with any file location
+  cert: fs.readFileSync(path.resolve('../httpsSample/server.crt'))
+}
 
 app.use(cookieParser());
 
@@ -26,12 +34,19 @@ app.post('/p4bcxeq3jgp2jvsx2tobdhs7',
 
 app.use('/', proxy)
 
-app.listen(PORT, () => console.log(`Visit your page at http://localhost:${PORT}`));
-
+if (process.env.WEBHEAD_USE_HTTPS){
+  https.createServer(certOptions, app).listen(PORT);
+  console.log(`Visit your page at ${protocol}://localhost:${PORT}`);
+} else {
+  app.listen(PORT, () => console.log(`Visit your page at ${protocol}://localhost:${PORT}`));
+}
 function proxy(req, res, next) {
   let reqBody = '';
   let resBody = [];
-  const url = `http://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`;
+  const requestConfig = {
+    url: `${protocol}://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`,
+    rejectUnauthorized: false
+  };
 
   req.on('data', (chunk) => {
     reqBody += chunk;
@@ -43,7 +58,7 @@ function proxy(req, res, next) {
     delete req.headers['if-none-match'];
     delete req.headers['if-modified-since'];
   }
-  const data = req.pipe(request(url).on('response', (response) => {
+  const data = req.pipe(request(requestConfig).on('response', (response) => {
     const injector = makeScriptInjector();
 
     response.on('data', (chunk) => {
@@ -63,6 +78,7 @@ function proxy(req, res, next) {
         .catch(error => console.log(error));
     })
     if (response.headers['content-type'].match('text/html')) {
+      delete response.headers['content-length'];
       res.set(response.headers);
       res.status(response.statusCode);
       data.pipe(injector).pipe(res);
