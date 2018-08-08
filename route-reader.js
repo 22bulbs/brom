@@ -32,7 +32,7 @@ if (routes) {
   console.log(paramPaths);
 
   const sendToServer = (responses) => {
-    axios.post('http://localhost:7913/results', responses)
+    axios.post(`http://localhost:${process.env.WEBHEAD_RESULTS_PORT}/results`, responses)
       .catch(err => console.error('Cannot post to results server', err));
   };
 
