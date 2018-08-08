@@ -6,7 +6,7 @@ const sampleData = [
       "api": "n/a",
       "external": false,
       "flags": [
-        "severe"
+        "severe", "deprecated", "csp"
       ]
     },
     "request": {

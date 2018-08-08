@@ -21,3 +21,14 @@
   display: flex;
 }
 
+#details-transaction-summary {
+  border: 1px black solid;
+  flex-grow: 1;
+  width: 300px;
+}
+
+#internal-external-dts {
+  margin-top: 0px;
+  align-self: flex-end;
+  justify-content: space-between;
+}

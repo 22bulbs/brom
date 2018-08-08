@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TransactionFilterBar from '../components/TransactionFilterBar.jsx';
 import TransactionList from '../components/TransactionList.jsx';
+import TransactionItem from '../components/TransactionItem.jsx';
 import { bindActionCreators } from '../../../node_modules/redux';
 import * as actions from '../actions/actions.js';
 
-const mapStateToProps = store => ({
- 
+
+
+const mapStateToProps = state => ({
+ transactions: state.transactions,
+ transactionMethodFilter: state.transactionMethodFilter,
+ transactionFlagFilter: state.transactionApiFilter,
+ transactionDomainFilter: state.transactionDomainFilter
+
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,17 +24,30 @@ const mapDispatchToProps = dispatch => ({
  setTransactionFlagFilter: flagFilter => dispatch(actions.setTransactionFlagFilter(flagFilter))
 });
 
-export default class TransactionListContainer extends Component {
+class TransactionListContainer extends Component {
   constructor(props) {
     super(props);
+    
   }
 
+
+ 
   render() {
+    const {
+    transactions,
+      transactionMethodFilter,
+      transactionFlagFilter,
+      transactionDomainFilter
+    } = this.props;
+
+   
     return (
       <div className='flex-column' id='transaction-list-container'>
         <TransactionFilterBar />
-        <TransactionList />
+        <TransactionList transactions={transactions}/>
       </div>
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionListContainer);

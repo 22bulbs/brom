@@ -1,21 +1,37 @@
 import React from 'react';
 
-const DetailsTransactionSummary = props => (
-  <div>DetailsTransactionSummary
-    <div className="method">
-    method example
+const DetailsTransactionSummary = ({ selectedTransaction }) => {
+  const flags = selectedTransaction.metadata.flags.map(flag => {
+    return (
+      flag
+    )
+  }).join(' ');
+
+  const pTagStyle = {
+    display: 'inline',
+    color: 'blue',
+    backgroundColor: 'gray'
+  }
+  const bottomRowStyle = {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
+  
+  return (
+    <div id="details-transaction-summary" className="flex-column">
+      <div className="icon" id="internal-external-dts">
+        <p style={pTagStyle}>{selectedTransaction.metadata.external ? 'External' : 'Internal'}</p>
+      </div>
+      <div className="method">
+        <h1>{selectedTransaction.metadata.method} </h1>
+      </div>
+      <div className="route" style={bottomRowStyle}>
+        {selectedTransaction.metadata.url} {flags}
+        
+      </div>
     </div>
-    <div className="route">
-    route example
-    </div>
-    <div className="icon">
-    domain request
-    </div>
-    <div className="icon">
-    icon
-    </div>
-  </div>
-);
+  )
+};
 
 export default DetailsTransactionSummary;
 
