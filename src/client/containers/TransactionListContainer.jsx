@@ -11,7 +11,7 @@ import * as actions from '../actions/actions.js';
 const mapStateToProps = state => ({
  transactions: state.transactions,
  transactionMethodFilter: state.transactionMethodFilter,
- transactionFlagFilter: state.transactionApiFilter,
+ transactionFlagFilter: state.transactionFlagFilter,
  transactionDomainFilter: state.transactionDomainFilter
 
 });
@@ -19,7 +19,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
  selectTransaction: requestName => dispatch(actions.selectTransaction(requestName)),
  setTransactionMethodFilter: methodFilter => dispatch(actions.setTransactionMethodFilter(methodFilter)),
- setTransactionApiFilter: apiFilter => dispatch(actions.setTransactionApiFilter(apiFilter)),
  setTransactionDomainFilter: domainFilter => dispatch(actions.setTransactionDomainFilter(domainFilter)),
  setTransactionFlagFilter: flagFilter => dispatch(actions.setTransactionFlagFilter(flagFilter))
 });
@@ -30,7 +29,6 @@ class TransactionListContainer extends Component {
     
   }
 
-
  
   render() {
     const {
@@ -40,11 +38,32 @@ class TransactionListContainer extends Component {
       transactionDomainFilter
     } = this.props;
 
-   
+    
+    const filter = (array) => {
+      let filteredTransactions = array;
+      if (transactionMethodFilter !== 'ALL') {
+        filteredTransactions =  filteredTransactions.filter(x => x.metadata.method === transactionMethodFilter);
+      }
+      if (transactionFlagFilter.length > 0) {
+        filteredTransactions = filteredTransactions.filter(x => {
+          const { flags }  = x.metadata;
+          for (const flag of flags) {
+            if (transactionFlagFilter.includes(flag)) return true;
+          }
+          return false;
+        });
+      }
+      if (transactionDomainFilter !== null) {
+        filteredTransactions = filteredTransactions.filter(x => x.metadata.external === transactionDomainFilter);
+      }
+      return filteredTransactions;
+    }
+    
+    
     return (
       <div className='flex-column' id='transaction-list-container'>
         <TransactionFilterBar />
-        <TransactionList transactions={transactions}/>
+        <TransactionList transactions={filter(transactions)}/>
       </div>
     )
   }

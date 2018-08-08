@@ -316,7 +316,7 @@ const sampleData = [
       "url": "/signup/",
       "method": "POST",
       "api": "n/a",
-      "external": false,
+      "external": true,
       "flags": [
         "severe"
       ]

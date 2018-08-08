@@ -5,9 +5,8 @@ const initialState = {
   transactions: sampleData,
   selectedTransactionIndex: 0,
   transactionMethodFilter: 'ALL',
-  transactionApiFilter: '',
-  transactionFlagFilter: '',
-  transactionDomainFilter: '' 
+  transactionFlagFilter: [],
+  transactionDomainFilter: null 
 }
 
 const transactionsReducer = (state = initialState.transactions, action) => {
@@ -37,19 +36,12 @@ const transactionMethodFilterReducer = (state = initialState.transactionMethodFi
   }
 }
 
-const transactionApiFilterReducer = (state = initialState.transactionApiFilter, action) => {
-  switch (action.type) {
-    case types.SET_TRANSACTION_API_FILTER:
-      return action.payload;
-    default:
-      return state;
-  }
-}
+
 
 const transactionFlagFilterReducer = (state = initialState.transactionFlagFilter, action) => {
   switch (action.type) {
     case types.SET_TRANSACTION_FLAG_FILTER:
-      return action.payload;
+      return [...state, action.payload];
     default:
       return state;
   }
@@ -69,7 +61,6 @@ module.exports = {
   transactionsReducer,
   transactionMethodFilterReducer,
   selectedTransactionIndexReducer,
-  transactionApiFilterReducer,
   transactionFlagFilterReducer,
   transactionDomainFilterReducer
 }
