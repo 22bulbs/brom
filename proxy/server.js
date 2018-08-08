@@ -12,10 +12,11 @@ const path = require('path');
 
 const spyController = require('./spyController');
 const makeScriptInjector = require('./make-script-injector');
+const transactionGenerator = require('../transactionGenerator.js')
 
 const app = express();
 const PORT = process.env.WEBHEAD_PROXY_PORT;
-const protocol = process.env.WEBHEAD_USE_HTTPS ? 'https' : 'http';
+const PROTOCOL = process.env.WEBHEAD_USE_HTTPS ? 'https' : 'http';
 
 app.use(cookieParser());
 
@@ -36,16 +37,16 @@ if (process.env.WEBHEAD_USE_HTTPS) {
     cert: fs.readFileSync(process.env.WEBHEAD_HTTPS_CERT)
   }
   https.createServer(certOptions, app).listen(PORT);
-  console.log(`Proxy running with SSL Encryption. Visit your page at ${protocol}://localhost:${PORT}`);
+  console.log(`Proxy running with SSL Encryption. Visit your page at ${PROTOCOL}://localhost:${PORT}`);
 } else {
-  app.listen(PORT, () => console.log(`Proxy running. Visit your page at ${protocol}://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`Proxy running. Visit your page at ${PROTOCOL}://localhost:${PORT}`));
 }
 
 function proxy(req, res, next) {
   let reqBody = '';
   let resBody = [];
   const requestConfig = {
-    url: `${protocol}://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`,
+    url: `${PROTOCOL}://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`,
     rejectUnauthorized: false
   };
   req.on('data', (chunk) => {
@@ -63,12 +64,15 @@ function proxy(req, res, next) {
     });
 
     response.on('end', () => {
-      let transaction;
+      let raw;
       if (response.headers['content-type'].match('text/html')) {
-        transaction = makeRawTransaction(req, reqBody, response, resBody);
+        const formattedBody = escapeHTML(decompress(resBody, response.headers))
+        raw = makeRawTransaction(req, reqBody, response, formattedBody);
       } else {
-        transaction = makeRawTransaction(req, reqBody, response, resBody);
+        const formattedBody = decompress(resBody, response.headers);
+        raw = makeRawTransaction(req, reqBody, response, formattedBody);
       }
+      const transaction = transactionGenerator(raw);
       axios.post(`http://localhost:${process.env.WEBHEAD_RESULTS_PORT}/results`, transaction)
         .then(() => next())
         .catch(error => console.log(error));
@@ -110,7 +114,7 @@ function makeRawTransaction(req, reqBody, res, resBody) {
     response: {
       statusCode: res.statusCode,
       headers: res.headers,
-      body: escapeHTML(decompress(resBody, res.headers))
+      body: resBody
     }
   };
 }

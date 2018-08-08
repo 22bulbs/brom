@@ -3,7 +3,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 
-const port = process.env.WEBHEAD_RESULTS_PORT;
+const PORT = process.env.WEBHEAD_RESULTS_PORT;
 
 const app = express();
 const server = require('http').Server(app);
@@ -45,4 +45,4 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(port);
+server.listen(PORT);
