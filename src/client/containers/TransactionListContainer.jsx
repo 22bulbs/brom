@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
  selectTransaction: id => dispatch(actions.selectTransaction(id)),
  onMethodClick: method => dispatch(actions.setTransactionMethodFilter(method)),
  onDomainClick: domain => dispatch(actions.setTransactionDomain(domain)),
- setTransactionFlagFilter: flagFilter => dispatch(actions.setTransactionFlagFilter(flagFilter))
+ onFlagClick: flag => dispatch(actions.toggleTrnsactionFlag(flag))
 });
 
 class TransactionListContainer extends Component {
@@ -40,7 +40,8 @@ class TransactionListContainer extends Component {
       transactionFlagFilter,
       transactionDomainFilter,
       onMethodClick,
-      onDomainClick
+      onDomainClick,
+      onFlagClick
     } = this.props;
 
     
@@ -70,6 +71,7 @@ class TransactionListContainer extends Component {
         <TransactionFilterBar 
         onMethodClick={onMethodClick}
         onDomainClick={onDomainClick}
+        onFlagClick={onFlagClick}
         />
         <TransactionList transactions={filter(transactions)}/>
       </div>

@@ -32,8 +32,9 @@ export const transactionMethodFilter = (state = 'ALL', action) => {
 export const transactionFlagFilter = (state = [], action) => {
   switch (action.type) {
     case types.TOGGLE_TRANSACTION_FLAG:
+    const index = state.indexOf(action.payload);
     // if the flag is not already in the flags array, add it.
-      if (state.indexOf(action.payload) === -1) {
+      if (index) {
         return [...state, action.payload];
       } 
     // but if it is already in the flags array, remove it.

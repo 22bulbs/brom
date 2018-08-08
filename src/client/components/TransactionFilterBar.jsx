@@ -1,6 +1,14 @@
 import React from 'react';
 import * as types from '../constants/actionTypes';
 
+const flags = ['severe', 'deprecated', 'csp', 'fp', 'redundant', 'conflicting', 'hasBody', 'cookies']
+const flagSpans = flags.map(flag => {
+  return (
+    <span key={flag} onClick={() => props.onFlagClick(flag)}>
+      {flag}
+    </span> 
+  );
+})
 const TransactionFilterBar = props => (
 
   <div className='flex-row'>
@@ -20,6 +28,15 @@ const TransactionFilterBar = props => (
       <span 
         onClick={() => props.onDomainClick(true)}
         >External</span>
+    </div>
+    <div id='flag=filter'>
+      {flags.map(flag => {
+        return (
+          <span key={flag} onClick={() => props.onFlagClick(flag)}>
+            {flag}
+          </span>
+        );
+      })}
     </div>
   </div>
 
