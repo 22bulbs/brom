@@ -1,6 +1,9 @@
 import React from 'react';
 
 const DetailsTransactionSummary = ({ selectedTransaction }) => {
+  if (!selectedTransaction) return (
+    <div>State is Empty. Try Again Later.</div>
+  )
   const flags = selectedTransaction.metadata.flags.map(flag => {
     return (
       flag
