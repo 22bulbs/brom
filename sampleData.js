@@ -1,4 +1,4 @@
-const sampleData = [
+export const sampleData = [
   {
     "metadata": {
       "url": "/",
@@ -354,4 +354,3 @@ const sampleData = [
 ]
 
 
-module.exports = sampleData;

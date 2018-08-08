@@ -1,4 +1,5 @@
-const sampleData = require('../../../sampleData');
+
+import { sampleData } from '../../../sampleData';
 import * as types from '../constants/actionTypes';
 
 
