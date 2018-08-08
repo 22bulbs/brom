@@ -32,7 +32,7 @@ app.use('/', proxy)
 
 if (process.env.WEBHEAD_USE_HTTPS) {
   const certOptions = {
-    key: fs.readFileSync(process.env.WEBHEAD_HTTPS_KEY), // this is bad, fix once config is set up to make this work with any file location
+    key: fs.readFileSync(process.env.WEBHEAD_HTTPS_KEY),
     cert: fs.readFileSync(process.env.WEBHEAD_HTTPS_CERT)
   }
   https.createServer(certOptions, app).listen(PORT);
