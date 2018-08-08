@@ -45,10 +45,16 @@ function minimumMatch(regexp) {
     .replace(/.\?/g, '');
 }
 
+// take a value that is either an array or undefined, and join that with a source to make a new array
+function smartConcat(target, source) {
+  if (target) return target.concat(source);
+  else return [source]
+}
 
 module.exports = {
   shake,
   minimumMatch,
   join,
   mergeAssign,
+  smartConcat
 };

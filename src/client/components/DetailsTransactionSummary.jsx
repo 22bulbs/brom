@@ -16,6 +16,7 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
     display: 'flex',
     justifyContent: 'space-between'
   }
+
   
   return (
     <div id="details-transaction-summary" className="flex-column">
