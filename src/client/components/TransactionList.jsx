@@ -1,13 +1,28 @@
 import React from 'react';
 import TransactionItem from './TransactionItem'; 
 
-const TransactionList = props => (
-  <div>TransactionList
-    <TransactionItem />
-    <TransactionItem />
-    <TransactionItem />
-  </div>
-);
+const TransactionList = props => {
+  const list = props.transactions.map((trans, index) => {
+    return (
+      <TransactionItem 
+      method={trans.metadata.method}
+      url={trans.metadata.url}
+      isExternal={trans.metadata.external ? 'External' : 'Internal'}
+      flags={trans.metadata.flags.join(' ')}
+      key={`trans${index}`}
+      />
+    )
+  })
+  return (
+    <div id="transaction-list">
+      {list}
+    </div>
+  )
+  };
+
 
 export default TransactionList;
+
+
+
 
