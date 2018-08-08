@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   // fix selectTransaction to include some sort of permanent id property for all the transactions
- selectTransaction: id => dispatch(actions.selectTransaction(id)),
+ onTransactionClick: id => dispatch(actions.selectTransaction(id)),
  onMethodClick: method => dispatch(actions.setTransactionMethodFilter(method)),
  onDomainClick: domain => dispatch(actions.setTransactionDomain(domain)),
  onFlagClick: flag => dispatch(actions.toggleTransactionFlag(flag))
@@ -38,6 +38,7 @@ class TransactionListContainer extends Component {
       transactionMethodFilter,
       transactionFlagFilter,
       transactionDomainFilter,
+      onTransactionClick,
       onMethodClick,
       onDomainClick,
       onFlagClick
@@ -70,11 +71,14 @@ class TransactionListContainer extends Component {
     return (
       <div className='flex-column' id='transaction-list-container'>
         <TransactionFilterBar 
-        onMethodClick={onMethodClick}
-        onDomainClick={onDomainClick}
-        onFlagClick={onFlagClick}
+          onMethodClick={onMethodClick}
+          onDomainClick={onDomainClick}
+          onFlagClick={onFlagClick}
         />
-        <TransactionList transactions={filter(transactions)}/>
+        <TransactionList 
+          transactions={filter(transactions)} 
+          onTransactionClick={onTransactionClick} 
+        />
       </div>
     )
   }
