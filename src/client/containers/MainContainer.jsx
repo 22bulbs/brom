@@ -38,7 +38,7 @@ class MainContainer extends Component {
         </div>
         <div className='flex-column' id='right-hand-side'>
           <DetailsTransactionSummary selectedTransaction={selectedTransaction} />
-          <TransactionDetailsContainer />
+          <TransactionDetailsContainer/>
         </div>
       </div>
     )

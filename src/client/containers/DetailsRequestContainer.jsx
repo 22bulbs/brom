@@ -3,24 +3,32 @@ import { connect } from 'react-redux';
 import DetailsAccordion from '../components/DetailsAccordion.jsx';
 
 const mapStateToProps = state => ({
- transactions: state.transactions,
- selectedTransactionIndex: state.selectedTransactionIndex
-}); 
+  transactions: state.transactions,
+  selectedTransactionIndex: state.selectedTransactionIndex
+});
 
 const mapDispatchToProps = dispatch => ({
 
 });
 
-export default class DetailsRequestContainer extends Component {
+class DetailsRequestContainer extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <div  className='flex-column' id='details-request-container'>
+    <div className='flex-column' id='details-request-container'>
+      <div id='request'>
         Request
+      </div>
+        <div className='flex-column' id='body'>
+          Body
+    {this.props.transactions[this.props.selectedTransactionIndex].request.body}
+        </div>
     </div>
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsRequestContainer);

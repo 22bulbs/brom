@@ -23,12 +23,23 @@
 
 #details-transaction-summary {
   border: 1px black solid;
-  flex-grow: 1;
+  flex-grow: .1;
   width: 300px;
+  height: 100px;
 }
 
 #internal-external-dts {
   margin-top: 0px;
   align-self: flex-end;
   justify-content: space-between;
+}
+
+#request {
+  border: 1px black solid;
+  width: 150px;
+}
+
+#details-response-container {
+  border: 1px black solid;
+  width: 148.5px;
 }
