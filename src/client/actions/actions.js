@@ -17,7 +17,7 @@ export const setTransactionMethodFilter = method => ({
 })
 
 
-export const toggleTrnsactionFlag = flag => ({
+export const toggleTransactionFlag = flag => ({
   type: types.TOGGLE_TRANSACTION_FLAG,
   payload: flag
 })

@@ -13,7 +13,6 @@ const mapStateToProps = state => ({
  transactionMethodFilter: state.transactionMethodFilter,
  transactionFlagFilter: state.transactionFlagFilter,
  transactionDomainFilter: state.transactionDomainFilter
-
 });
 
 
@@ -23,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
  selectTransaction: id => dispatch(actions.selectTransaction(id)),
  onMethodClick: method => dispatch(actions.setTransactionMethodFilter(method)),
  onDomainClick: domain => dispatch(actions.setTransactionDomain(domain)),
- onFlagClick: flag => dispatch(actions.toggleTrnsactionFlag(flag))
+ onFlagClick: flag => dispatch(actions.toggleTransactionFlag(flag))
 });
 
 class TransactionListContainer extends Component {
@@ -48,11 +47,11 @@ class TransactionListContainer extends Component {
     const filter = (array) => {
       let filteredTransactions = array;
       if (transactionMethodFilter !== 'ALL') {
-        filteredTransactions =  filteredTransactions.filter(x => x.metadata.method === transactionMethodFilter);
+        filteredTransactions =  filteredTransactions.filter(trans => trans.metadata.method === transactionMethodFilter);
       }
       if (transactionFlagFilter.length > 0) {
-        filteredTransactions = filteredTransactions.filter(x => {
-          const { flags }  = x.metadata;
+        filteredTransactions = filteredTransactions.filter(trans => {
+          const { flags }  = trans.metadata;
           for (const flag of flags) {
             if (transactionFlagFilter.includes(flag)) return true;
           }
@@ -60,10 +59,12 @@ class TransactionListContainer extends Component {
         });
       }
       if (transactionDomainFilter !== null) {
-        filteredTransactions = filteredTransactions.filter(x => x.metadata.external === transactionDomainFilter);
+        filteredTransactions = filteredTransactions.filter(trans => trans.metadata.external === transactionDomainFilter);
       }
       return filteredTransactions;
     }
+
+
     
     
     return (
