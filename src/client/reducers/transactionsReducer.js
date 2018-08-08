@@ -1,11 +1,20 @@
-const sampleData = require('../../../sampleData');
+
+import { sampleData } from '../../../sampleData';
 import * as types from '../constants/actionTypes';
 
+let nextTransactionId = 0;
 
-export const transactions = (state = sampleData, action) => {
+const addIndex = object => ({
+  ...object, 
+  id: nextTransactionId++
+});
+
+
+export const transactions = (state = [], action) => {
   switch  (action.type) {
     case types.ADD_TRANSACTION: 
-      return [...state, action.payload]
+      const incoming = action.payload.map(trans => addIndex(trans))
+      return [...state, ...incoming]
     default:
       return state;
   }

@@ -16,12 +16,12 @@ const TransactionFilterBar = props => (
       </select>
     </div>
     <div id='domain-filter'>
-      <span 
-        onClick={() => props.onDomainClick(false)}
-      >Internal</span>
-      <span 
-        onClick={() => props.onDomainClick(true)}
-        >External</span>
+      <span onClick={() => props.onDomainClick(false)}>
+        Internal
+      </span>
+      <span onClick={() => props.onDomainClick(true)}>
+        External
+      </span>
     </div>
     <div id='flag=filter'>
       {flags.map(flag => {
