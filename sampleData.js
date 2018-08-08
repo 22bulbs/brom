@@ -318,7 +318,7 @@ const sampleData = [
       "api": "n/a",
       "external": true,
       "flags": [
-        "severe"
+        "severe", "fp"
       ]
     },
     "request": {
