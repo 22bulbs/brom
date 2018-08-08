@@ -6,9 +6,9 @@ export const addTransaction = transaction => ({
   payload: transaction
 })
 
-export const selectTransaction = transactionIndex => ({
+export const selectTransaction = id => ({
   type: types.SELECT_TRANSACTION,
-  payload: transactionIndex
+  payload: id
 })
 
 export const setTransactionMethodFilter = method => ({
@@ -16,17 +16,13 @@ export const setTransactionMethodFilter = method => ({
   payload: method
 })
 
-export const setTransactionApiFilter = api => ({
-  type: types.SET_TRANSACTION_API_FILTER,
-  payload: api
+
+export const toggleTrnsactionFlag = flag => ({
+  type: types.TOGGLE_TRANSACTION_FLAG,
+  payload: flag
 })
 
-export const setTransactionFlagFilter = flag => ({
-  type: types.SET_TRANSACTION_FLAG_FILTER,
-  payload: flag
-}) 
-
-export const setTransactionDomainFilter = domain => ({
-  type: types.SET_TRANSACTION_DOMAIN_FILTER,
+export const setTransactionDomain = domain => ({
+  type: types.SET_TRANSACTION_DOMAIN,
   payload: domain
 })

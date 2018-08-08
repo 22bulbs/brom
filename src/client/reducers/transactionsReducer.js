@@ -1,15 +1,8 @@
 const sampleData = require('../../../sampleData');
 import * as types from '../constants/actionTypes';
 
-const initialState = {
-  transactions: sampleData,
-  selectedTransactionIndex: 0,
-  transactionMethodFilter: 'ALL',
-  transactionFlagFilter: [],
-  transactionDomainFilter: null 
-}
 
-const transactionsReducer = (state = initialState.transactions, action) => {
+export const transactions = (state = sampleData, action) => {
   switch  (action.type) {
     case types.ADD_TRANSACTION: 
       return [...state, action.payload]
@@ -18,7 +11,7 @@ const transactionsReducer = (state = initialState.transactions, action) => {
   }
 }
 
-const selectedTransactionIndexReducer = (state = initialState.selectedTransactionIndex, action) => {
+export const selectedTransactionIndex = (state = 0, action) => {
   switch (action.type) {
     case types.SELECT_TRANSACTION:
       return action.payload
@@ -27,7 +20,7 @@ const selectedTransactionIndexReducer = (state = initialState.selectedTransactio
   }
 }
 
-const transactionMethodFilterReducer = (state = initialState.transactionMethodFilter, action) => {
+export const transactionMethodFilter = (state = 'ALL', action) => {
   switch (action.type) {
     case types.SET_TRANSACTION_METHOD_FILTER:
       return action.payload;
@@ -36,18 +29,24 @@ const transactionMethodFilterReducer = (state = initialState.transactionMethodFi
   }
 }
 
-
-
-const transactionFlagFilterReducer = (state = initialState.transactionFlagFilter, action) => {
+export const transactionFlagFilter = (state = [], action) => {
   switch (action.type) {
-    case types.SET_TRANSACTION_FLAG_FILTER:
-      return [...state, action.payload];
+    case types.TOGGLE_TRANSACTION_FLAG:
+    // if the flag is not already in the flags array, add it.
+      if (state.indexOf(action.payload) === -1) {
+        return [...state, action.payload];
+      } 
+    // but if it is already in the flags array, remove it.
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }
 }
 
-const transactionDomainFilterReducer = (state = initialState.transactionDomainFilter, action) => {
+export const transactionDomainFilter = (state = null, action) => {
   switch (action.type) {
     case types.SET_TRANSACTION_DOMAIN_FILTER:
       return action.payload;
@@ -56,11 +55,3 @@ const transactionDomainFilterReducer = (state = initialState.transactionDomainFi
   }
 }
 
-
-module.exports = {
-  transactionsReducer,
-  transactionMethodFilterReducer,
-  selectedTransactionIndexReducer,
-  transactionFlagFilterReducer,
-  transactionDomainFilterReducer
-}
