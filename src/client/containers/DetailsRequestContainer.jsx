@@ -17,6 +17,9 @@ class DetailsRequestContainer extends Component {
   }
 
   render() {
+    if (this.props.transactions.length === 0) return (
+      <div>State is empty. Try again later</div>
+    )
     return (
     <div className='flex-column' id='details-request-container'>
       <div id='request'>
