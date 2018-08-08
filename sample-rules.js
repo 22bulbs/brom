@@ -7,6 +7,8 @@ const {
 
 module.exports = [
   {
+    //unique id for the rule. used to deactivate in config
+    id:"include-csp",
 
     // header that the rule applies to
     header: 'content-security-policy',
@@ -30,6 +32,7 @@ module.exports = [
 
   },
   {
+    id:"csp-no-*",
     header: 'content-security-policy',
     when: (headers, type) => type === 'response' && headers['content-security-policy'],
     expect: (headers) => {
@@ -45,6 +48,7 @@ module.exports = [
     },
   },
   {
+    id:"no-x-powered-by",
     header: 'x-powered-by',
     when: (_, type) => type === 'response',
     expect: headers => !headers['x-powered-by'],
@@ -57,6 +61,7 @@ module.exports = [
     },
   },
   {
+    id:"include-nosniff",
     header: 'x-content-type-options',
     when: (_, type) => type === 'response',
     expect: headers => headers['x-content-type'] === 'nosniff',
@@ -69,6 +74,7 @@ module.exports = [
     },
   },
   {
+    id:"include-fp",
     header: 'feature-policy',
     when: (headers, type) => type === 'response' && headers['content-type'] && headers['content-type'].indexOf('text/html') !== -1,
     expect: headers => headers['feature-policy'],
@@ -81,6 +87,7 @@ module.exports = [
     },
   },
   {
+    id:"include-x-xss-protection",
     header: 'x-xss-protection',
     when: (headers, type) => type === 'response' && headers['content-type'] && headers['content-type'].indexOf('text/html') !== -1,
     expect: headers => headers['x-xss-protection'] !== 0,
@@ -89,7 +96,7 @@ module.exports = [
       flags: ['severe'],
     },
     pass: {
-      flags: ['fp'],
+      flags: [],
     },
   },
 ];
