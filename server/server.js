@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -9,7 +10,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-let transactions = [];
+const transactions = [];
 
 app.use(express.static('tempclient'));
 app.use(express.static('dist'));
@@ -17,10 +18,10 @@ app.use(bodyParser.json());
 
 app.post('/results', (req, res) => {
   console.log('received results');
-  transactions = transactions.concat(req.body);
+  const newTransactions = [].concat(req.body);
+  transactions.push(...newTransactions);
 
-  io.emit('transaction', req.body);
-  io.emit('test', 'hello');
+  io.emit('transaction', newTransactions);
 
   const destination = process.env.WEBHEAD_WRITE_DESTINATION;
   if (destination) {
@@ -38,11 +39,7 @@ app.post('/results', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
   socket.emit('transaction', transactions);
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
 });
 
 server.listen(PORT);
