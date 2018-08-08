@@ -14,12 +14,8 @@ const spyController = require('./spyController');
 const makeScriptInjector = require('./make-script-injector');
 
 const app = express();
-const PORT = 9999;
+const PORT = process.env.WEBHEAD_PROXY_PORT;
 const protocol = process.env.WEBHEAD_USE_HTTPS ? 'https' : 'http';
-const certOptions = {
-  key: fs.readFileSync(path.resolve('../httpsSample/server.key')),// this is bad, fix once config is set up to make this work with any file location
-  cert: fs.readFileSync(path.resolve('../httpsSample/server.crt'))
-}
 
 app.use(cookieParser());
 
@@ -34,12 +30,17 @@ app.post('/p4bcxeq3jgp2jvsx2tobdhs7',
 
 app.use('/', proxy)
 
-if (process.env.WEBHEAD_USE_HTTPS){
+if (process.env.WEBHEAD_USE_HTTPS) {
+  const certOptions = {
+    key: fs.readFileSync(process.env.WEBHEAD_HTTPS_KEY), // this is bad, fix once config is set up to make this work with any file location
+    cert: fs.readFileSync(process.env.WEBHEAD_HTTPS_CERT)
+  }
   https.createServer(certOptions, app).listen(PORT);
-  console.log(`Visit your page at ${protocol}://localhost:${PORT}`);
+  console.log(`Proxy running with SSL Encryption. Visit your page at ${protocol}://localhost:${PORT}`);
 } else {
-  app.listen(PORT, () => console.log(`Visit your page at ${protocol}://localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`Proxy running. Visit your page at ${protocol}://localhost:${PORT}`));
 }
+
 function proxy(req, res, next) {
   let reqBody = '';
   let resBody = [];
@@ -50,9 +51,6 @@ function proxy(req, res, next) {
 
   req.on('data', (chunk) => {
     reqBody += chunk;
-  });
-  req.on('end', () => {
-    // console.log(reqBody);
   });
   if (!process.env.WEBHEAD_PRESERVE_CACHING) {
     delete req.headers['if-none-match'];
@@ -66,14 +64,13 @@ function proxy(req, res, next) {
     });
 
     response.on('end', () => {
-      // console.log(response.headers, resBody);
       let transaction;
       if (response.headers['content-type'].match('text/html')) {
         transaction = makeRawTransaction(req, reqBody, response, resBody);
       } else {
         transaction = makeRawTransaction(req, reqBody, response, resBody);
       }
-      axios.post('http://localhost:7913/results', transaction)
+      axios.post(`http://localhost:${process.env.WEBHEAD_RESULTS_PORT}/results`, transaction)
         .then(() => next())
         .catch(error => console.log(error));
     })

@@ -3,7 +3,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 
-const port = 7913;
+const port = process.env.WEBHEAD_RESULTS_PORT;
 
 const app = express();
 const server = require('http').Server(app);
