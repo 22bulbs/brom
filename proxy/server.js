@@ -1,5 +1,5 @@
 // this is the server that the spy script redirects to
-
+const zlib = require('zlib');
 const express = require('express');
 const bodyparser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -30,7 +30,7 @@ app.listen(PORT, () => console.log(`Visit your page at http://localhost:${PORT}`
 
 function proxy(req, res, next) {
   let reqBody = '';
-  let resBody = '';
+  let resBody = [];
   const url = `http://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`;
 
   req.on('data', (chunk) => {
@@ -47,14 +47,14 @@ function proxy(req, res, next) {
     const injector = makeScriptInjector();
 
     response.on('data', (chunk) => {
-      resBody += chunk;
+      resBody.push(chunk);
     });
 
     response.on('end', () => {
       // console.log(response.headers, resBody);
       let transaction;
       if (response.headers['content-type'].match('text/html')) {
-        transaction = makeRawTransaction(req, reqBody, response, escapeHTML(resBody));
+        transaction = makeRawTransaction(req, reqBody, response, resBody);
       } else {
         transaction = makeRawTransaction(req, reqBody, response, resBody);
       }
@@ -63,6 +63,8 @@ function proxy(req, res, next) {
         .catch(error => console.log(error));
     })
     if (response.headers['content-type'].match('text/html')) {
+      res.set(response.headers);
+      res.status(response.statusCode);
       data.pipe(injector).pipe(res);
     } else {
       data.pipe(res);
@@ -85,7 +87,15 @@ function makeRawTransaction(req, reqBody, res, resBody) {
     response: {
       statusCode: res.status,
       headers: res.headers,
-      body: resBody
+      body: escapeHTML(decompress(resBody, res.headers))
     }
   };
+}
+
+function decompress(chunks, headers) {
+  const buffer = Buffer.concat(chunks)
+  if (!headers['content-encoding']) return buffer.toString().slice(0, 5000);
+  if (headers['content-encoding'] === 'gzip') return zlib.gunzipSync(buffer).toString().slice(0, 5000);
+  if (headers['content-encoding'] === 'deflate') return zlib.inflateSync(buffer).toString().slice(0, 5000);
+  return 'none of these worked'
 }
