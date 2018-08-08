@@ -11,7 +11,7 @@ const sampleData = [
     },
     "request": {
       "headers": {},
-      "body": "",
+      "body": "This is a sample body that we will render in a request",
       "cookies": []
     },
     "response": {
@@ -316,9 +316,9 @@ const sampleData = [
       "url": "/signup/",
       "method": "POST",
       "api": "n/a",
-      "external": false,
+      "external": true,
       "flags": [
-        "severe"
+        "severe", "fp"
       ]
     },
     "request": {
