@@ -23,8 +23,12 @@ class DetailsRequestContainer extends Component {
         Request
       </div>
         <div className='flex-column' id='body'>
-          Body
+          Body <br/>
     {this.props.transactions[this.props.selectedTransactionIndex].request.body}
+        </div>
+        <div id='cookie'>
+        Cookie <br/>
+        {this.props.transactions[this.props.selectedTransactionIndex].request.cookies}
         </div>
     </div>
     )
