@@ -1,8 +1,6 @@
 import React from 'react';
 import * as types from '../constants/actionTypes';
 
-const methods = ['ALL', 'GET', 'POST', 'PUT', 'DELETE'];
-
 const TransactionFilterBar = props => (
 
   <div className='flex-row'>
@@ -16,8 +14,12 @@ const TransactionFilterBar = props => (
       </select>
     </div>
     <div id='domain-filter'>
-      <select>
-      </select>
+      <span 
+        onClick={() => props.onDomainClick(false)}
+      >Internal</span>
+      <span 
+        onClick={() => props.onDomainClick(true)}
+        >External</span>
     </div>
   </div>
 

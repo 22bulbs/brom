@@ -48,7 +48,8 @@ export const transactionFlagFilter = (state = [], action) => {
 
 export const transactionDomainFilter = (state = null, action) => {
   switch (action.type) {
-    case types.SET_TRANSACTION_DOMAIN_FILTER:
+    case types.SET_TRANSACTION_DOMAIN:
+      if (state === action.payload) return null;
       return action.payload;
     default:
       return state;
