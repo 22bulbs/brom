@@ -11,7 +11,7 @@ const sampleData = [
     },
     "request": {
       "headers": {},
-      "body": "",
+      "body": "This is a sample body that we will render in a request",
       "cookies": []
     },
     "response": {
