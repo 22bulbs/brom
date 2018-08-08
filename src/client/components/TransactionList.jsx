@@ -10,7 +10,6 @@ const TransactionList = props => {
       isExternal={trans.metadata.external ? 'External' : 'Internal'}
       flags={trans.metadata.flags.join(' ')}
       key={`trans${index}`}
-      index={index}
       />
     )
   })
