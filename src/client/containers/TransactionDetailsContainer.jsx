@@ -5,12 +5,12 @@ import DetailsRequestContainer from './DetailsRequestContainer.jsx';
 import DetailsResponseContainer from './DetailsResponseContainer.jsx';
 
 
-const mapStateToProps = store => ({
-
+const mapStateToProps = state => ({
+  
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  
 });
 
 export default class TransactionDetailsContainer extends Component {
@@ -20,7 +20,7 @@ export default class TransactionDetailsContainer extends Component {
 
   render(){
     return(
-      <div id='transaction-details-container'>
+      <div id='transaction-details-container' className="flex-row">
         <DetailsRequestContainer />
         <DetailsResponseContainer />
       </div>  
