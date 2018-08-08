@@ -4,7 +4,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   transactions: sampleData,
   selectedTransactionIndex: 0,
-  transactionMethodFilter: '',
+  transactionMethodFilter: 'ALL',
   transactionApiFilter: '',
   transactionFlagFilter: '',
   transactionDomainFilter: '' 
