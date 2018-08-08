@@ -48,7 +48,6 @@ function proxy(req, res, next) {
     url: `${protocol}://localhost:${process.env.WEBHEAD_USER_PORT}${req.url}`,
     rejectUnauthorized: false
   };
-
   req.on('data', (chunk) => {
     reqBody += chunk;
   });
@@ -78,7 +77,18 @@ function proxy(req, res, next) {
       delete response.headers['content-length'];
       res.set(response.headers);
       res.status(response.statusCode);
-      data.pipe(injector).pipe(res);
+      if (response.headers['content-encoding'] === 'gzip') {
+        const gzip = zlib.createGzip();
+        const gunzip = zlib.createGunzip();
+        data.pipe(gunzip).pipe(injector).pipe(gzip).pipe(res);
+      } else if (response.headers['content-encoding'] === 'deflate') {
+        const inflate = zlib.createInflate();
+        const deflate = zlib.createDeflate();
+        data.pipe(inflate).pipe(injector).pipe(deflate).pipe(res);
+      } else {
+        data.pipe(injector).pipe(res);
+      
+      }
     } else {
       data.pipe(res);
     }
@@ -98,7 +108,7 @@ function makeRawTransaction(req, reqBody, res, resBody) {
       body: reqBody,
     },
     response: {
-      statusCode: res.status,
+      statusCode: res.statusCode,
       headers: res.headers,
       body: escapeHTML(decompress(resBody, res.headers))
     }
