@@ -12,8 +12,9 @@ const io = require('socket.io')(server);
 
 const transactions = [];
 
-app.use(express.static('public'));
-app.use(express.static('dist'));
+app.use(express.static('tempclient'));
+// app.use(express.static('public'));
+// app.use(express.static('dist'));
 app.use(bodyParser.json());
 
 app.post('/results', (req, res) => {
