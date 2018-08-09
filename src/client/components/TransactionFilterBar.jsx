@@ -1,13 +1,12 @@
 import React from 'react';
-import * as types from '../constants/actionTypes';
 
 const flags = ['severe', 'deprecated', 'csp', 'fp', 'redundant', 'conflicting', 'hasBody', 'cookies']
 
-const TransactionFilterBar = props => (
+const TransactionFilterBar = ({ onMethodClick, onDomainClick, onFlagClick }) => (
 
   <div className='flex-row'>
     <div id='method-filter'>
-      <select onChange={(e) => props.onMethodClick(e.target.value)}>
+      <select onChange={(e) => onMethodClick(e.target.value)}>
         <option value='ALL'>All</option>
         <option value='GET'>Get</option>
         <option value='POST'>Post</option>
@@ -16,17 +15,17 @@ const TransactionFilterBar = props => (
       </select>
     </div>
     <div id='domain-filter'>
-      <span onClick={() => props.onDomainClick(false)}>
+      <span onClick={() => onDomainClick(false)}>
         Internal
       </span>
-      <span onClick={() => props.onDomainClick(true)}>
+      <span onClick={() => onDomainClick(true)}>
         External
       </span>
     </div>
     <div id='flag=filter'>
       {flags.map(flag => {
         return (
-          <span key={flag} onClick={() => props.onFlagClick(flag)}>
+          <span key={flag} onClick={() => onFlagClick(flag)}>
             {flag}
           </span>
         );
