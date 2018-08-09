@@ -14,4 +14,12 @@ ReactDOM.render(
     document.getElementById("root")
 );
 
+// uncomment the following line when not testing the back end 
 store.dispatch(addTransaction(sampleData));
+
+// uncomment the following block for use with backend and web sockets
+// const socket = io();
+// socket.on('transaction', transaction => {
+//   console.log('transaction received')
+//   store.dispatch(addTransaction(transaction));
+// });

@@ -1,8 +1,8 @@
 import React from 'react';
 import TransactionItem from './TransactionItem'; 
 
-const TransactionList = props => {
-  const list = props.transactions.map((trans, index) => {
+const TransactionList = ({ transactions, onTransactionClick }) => {
+  const list = transactions.map((trans, index) => {
     return (
       <TransactionItem 
         method={trans.metadata.method}
@@ -11,7 +11,7 @@ const TransactionList = props => {
         flags={trans.metadata.flags.join(' ')}
         key={`trans${index}`}
         id={trans.id}
-        onTransactionClick={props.onTransactionClick} 
+        onTransactionClick={onTransactionClick} 
       />
     )
   })

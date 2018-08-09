@@ -28,13 +28,10 @@ const mapDispatchToProps = dispatch => ({
 class TransactionListContainer extends Component {
   constructor(props) {
     super(props);
-    
   }
 
- 
   render() {
     const {
-      transactions,
       transactionMethodFilter,
       transactionFlagFilter,
       transactionDomainFilter,
@@ -44,7 +41,8 @@ class TransactionListContainer extends Component {
       onFlagClick
     } = this.props;
 
-    
+    let { transactions } = this.props;
+
     const filter = (array) => {
       let filteredTransactions = array;
       if (transactionMethodFilter !== 'ALL') {
@@ -64,9 +62,9 @@ class TransactionListContainer extends Component {
       }
       return filteredTransactions;
     }
+    const reverse = (array) => [...array].reverse();
 
-
-    
+    transactions = reverse(filter(transactions));
     
     return (
       <div className='flex-column' id='transaction-list-container'>
@@ -76,7 +74,7 @@ class TransactionListContainer extends Component {
           onFlagClick={onFlagClick}
         />
         <TransactionList 
-          transactions={filter(transactions)} 
+          transactions={transactions} 
           onTransactionClick={onTransactionClick} 
         />
       </div>
