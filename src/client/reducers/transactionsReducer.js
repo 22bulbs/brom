@@ -1,15 +1,10 @@
-
-import { sampleData } from '../../../sampleData';
 import * as types from '../constants/actionTypes';
 
 let nextTransactionId = 0;
-
 const addIndex = object => ({
   ...object, 
   id: nextTransactionId++
 });
-
-
 export const transactions = (state = [], action) => {
   switch  (action.type) {
     case types.ADD_TRANSACTION: 
