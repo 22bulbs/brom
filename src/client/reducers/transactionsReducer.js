@@ -9,7 +9,7 @@ export const transactions = (state = [], action) => {
   switch  (action.type) {
     case types.ADD_TRANSACTION: 
       const incoming = action.payload.map(trans => addIndex(trans))
-      return [...incoming, ...state]
+      return [...state, ...incoming]
     default:
       return state;
   }
