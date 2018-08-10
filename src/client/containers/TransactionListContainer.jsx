@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TransactionFilterBar from '../components/TransactionFilterBar.jsx';
 import TransactionList from '../components/TransactionList.jsx';
-import TransactionItem from '../components/TransactionItem.jsx';
-import { bindActionCreators } from '../../../node_modules/redux';
 import * as actions from '../actions/actions.js';
-import { METHODS } from 'http';
 
 
 
