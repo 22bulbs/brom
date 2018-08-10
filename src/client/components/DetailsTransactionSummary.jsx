@@ -1,6 +1,7 @@
 import React from 'react';
 
 const DetailsTransactionSummary = ({ selectedTransaction }) => {
+  
   if (!selectedTransaction) return (
     <div>State is Empty. Try Again Later.</div>
   )
@@ -11,9 +12,7 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
   }).join(' ');
 
   const pTagStyle = {
-    display: 'inline',
-    color: 'blue',
-    backgroundColor: 'gray'
+    display: 'inline'
   }
   const bottomRowStyle = {
     display: 'flex',
@@ -23,13 +22,13 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
   
   return (
     <div id="details-transaction-summary" className="flex-column">
-      <div className="icon" id="internal-external-dts">
-        <p style={pTagStyle}>{selectedTransaction.metadata.external ? 'External' : 'Internal'}</p>
+      <div id="internal-external-dts">
+        {selectedTransaction.metadata.external ? 'External' : 'Internal'}
       </div>
       <div className="method">
         <h1>{selectedTransaction.metadata.method} </h1>
       </div>
-      <div className="route" style={bottomRowStyle}>
+      <div className="route">
         {selectedTransaction.metadata.url} {flags}
         
       </div>
