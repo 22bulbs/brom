@@ -43,3 +43,8 @@
   border: 1px black solid;
   width: 148.5px;
 }
+
+#warning {
+  border: 1px black solid;
+  width: 300px;
+}
