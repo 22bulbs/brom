@@ -10,7 +10,8 @@ import { addTransaction } from '../actions/actions';
 // will add new 'meta' key on state, and definitely pass as props into this container later
 const mapStateToProps = state => ({
   transactions: state.transactions,
-  selectedTransactionIndex: state.selectedTransactionIndex
+  selectedTransactionIndex: state.selectedTransactionIndex,
+  globalData: state.globalData
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,14 +20,14 @@ const mapDispatchToProps = dispatch => ({
 
 
 
-const MainContainer = ({ transactions, selectedTransactionIndex }) => {
+const MainContainer = ({ transactions, selectedTransactionIndex, globalData }) => {
 
   const selectedTransaction = transactions[selectedTransactionIndex];
   
   return (
     <div id='main-container'>
       <div className='flex-column' id='left-hand-side'>
-        <AuditResultsSummary />
+        <AuditResultsSummary globalData={globalData} />
         <TransactionListContainer />
       </div>
       <div className='flex-column' id='right-hand-side'>
