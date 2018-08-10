@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import AuditResultsSummary from '../components/AuditResultsSummary.jsx';
 import TransactionDetailsContainer from './TransactionDetailsContainer.jsx';
@@ -15,7 +15,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addTransaction: requestName => dispatch(addTransaction(requestName))
-
 });
 
 

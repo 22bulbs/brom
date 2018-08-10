@@ -10,6 +10,7 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = state => ({
  transactions: state.transactions,
+ selectedTransactionIndex: state.selectedTransactionIndex,
  transactionMethodFilter: state.transactionMethodFilter,
  transactionFlagFilter: state.transactionFlagFilter,
  transactionDomainFilter: state.transactionDomainFilter
@@ -32,6 +33,7 @@ class TransactionListContainer extends Component {
 
   render() {
     const {
+      selectedTransactionIndex,
       transactionMethodFilter,
       transactionFlagFilter,
       transactionDomainFilter,
@@ -76,6 +78,7 @@ class TransactionListContainer extends Component {
         <TransactionList 
           transactions={transactions} 
           onTransactionClick={onTransactionClick} 
+          selectedTransactionIndex={selectedTransactionIndex}
         />
       </div>
     )
