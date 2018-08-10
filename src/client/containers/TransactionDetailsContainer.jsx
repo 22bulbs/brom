@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DetailsTransactionSummary from '../components/DetailsTransactionSummary.jsx';
 import DetailsRequestContainer from './DetailsRequestContainer.jsx';
 import DetailsResponseContainer from './DetailsResponseContainer.jsx';
-import { bindActionCreators } from '../../../../../../Library/Caches/typescript/2.9/node_modules/redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions'
 
 const mapStateToProps = state => ({
