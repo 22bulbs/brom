@@ -1,4 +1,5 @@
 {
+  "title": "XHR Demo Site", 
   "server":"demo/server.js",
   "port": 3000,
   "https": {
