@@ -5,6 +5,7 @@ import TransactionList from '../components/TransactionList.jsx';
 import TransactionItem from '../components/TransactionItem.jsx';
 import { bindActionCreators } from '../../../node_modules/redux';
 import * as actions from '../actions/actions.js';
+import { METHODS } from 'http';
 
 
 
@@ -42,9 +43,16 @@ class TransactionListContainer extends Component {
       onDomainClick,
       onFlagClick
     } = this.props;
-
     let { transactions } = this.props;
 
+    const makeMethodsList = (array) => {
+      const list = array.map((transaction) => transaction.metadata.method);
+      return [...new Set(list)].map(method => {
+        const lower = method.slice(1).toLowerCase();
+        const methodText = method[0].concat(lower);
+        return <option key={method} value={method}>{methodText}</option>
+      });    
+    }
     const filter = (array) => {
       let filteredTransactions = array;
       if (transactionMethodFilter !== 'ALL') {
@@ -66,7 +74,9 @@ class TransactionListContainer extends Component {
     }
     const reverse = (array) => [...array].reverse();
 
+    const methods = makeMethodsList(transactions);
     transactions = reverse(filter(transactions));
+    
     
     return (
       <div className='flex-column' id='transaction-list-container'>
@@ -74,6 +84,7 @@ class TransactionListContainer extends Component {
           onMethodClick={onMethodClick}
           onDomainClick={onDomainClick}
           onFlagClick={onFlagClick}
+          methods={methods}
         />
         <TransactionList 
           transactions={transactions} 
