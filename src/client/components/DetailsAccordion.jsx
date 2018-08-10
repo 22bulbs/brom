@@ -1,7 +1,7 @@
 import React from 'react';
 
-const DetailsAccordion = props => (
-  <div>DetailsAccordion</div>
+const DetailsAccordion = ({ text, id }) => (
+  <div id={id}>{text}</div>
 );
 
 export default DetailsAccordion;
