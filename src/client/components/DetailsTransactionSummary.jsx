@@ -11,15 +11,6 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
     )
   }).join(' ');
 
-  const pTagStyle = {
-    display: 'inline'
-  }
-  const bottomRowStyle = {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
-
-  
   return (
     <div id="details-transaction-summary" className="flex-column">
       <div id="internal-external-dts">
