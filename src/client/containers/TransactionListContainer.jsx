@@ -77,7 +77,7 @@ class TransactionListContainer extends Component {
     
     return (
       <div className='flex-column' id='transaction-list-container'>
-        <TransactionFilterBar 
+        <TransactionFilterBar
           onMethodClick={onMethodClick}
           onDomainClick={onDomainClick}
           onFlagClick={onFlagClick}
