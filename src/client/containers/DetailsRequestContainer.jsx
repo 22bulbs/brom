@@ -11,31 +11,26 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-class DetailsRequestContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+const DetailsRequestContainer = ({ transactions, selectedTransactionIndex }) => {
+  if (transactions.length === 0) return <div>State is empty.</div>
+  
+  const selected = transactions[selectedTransactionIndex];
 
-  render() {
-    if (this.props.transactions.length === 0) return (
-      <div>State is empty. Try again later</div>
-    )
-    return (
+  return (
     <div className='flex-column' id='details-request-container'>
       <div id='request'>
         Request
       </div>
-        <div className='flex-column' id='body'>
-          Body <br/>
-    {this.props.transactions[this.props.selectedTransactionIndex].request.body}
-        </div>
-        <div id='cookie'>
-        Cookie <br/>
-        {this.props.transactions[this.props.selectedTransactionIndex].request.cookies}
-        </div>
+      <div className='flex-column' id='body'>
+        Body <br />
+        {selected.request.body}
+      </div>
+      <div id='cookie'>
+        Cookie <br />
+        {selected.request.cookies}
+      </div>
     </div>
-    )
-  }
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsRequestContainer);
