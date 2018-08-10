@@ -1,7 +1,8 @@
 import React from 'react';
 import TransactionItem from './TransactionItem'; 
 
-const TransactionList = ({ transactions, onTransactionClick }) => {
+
+const TransactionList = ({ transactions, selectedTransactionIndex, onTransactionClick }) => {
   const list = transactions.map((trans, index) => {
     return (
       <TransactionItem 
@@ -11,7 +12,8 @@ const TransactionList = ({ transactions, onTransactionClick }) => {
         flags={trans.metadata.flags.join(' ')}
         key={`trans${index}`}
         id={trans.id}
-        onTransactionClick={onTransactionClick} 
+        isSelected={(selectedTransactionIndex === trans.id)}
+        onTransactionClick={onTransactionClick}
       />
     )
   })
