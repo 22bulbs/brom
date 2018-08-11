@@ -26,3 +26,8 @@ export const setTransactionDomain = domain => ({
   type: types.SET_TRANSACTION_DOMAIN,
   payload: domain
 })
+
+export const updateGlobalData = data => ({
+  type:types.UPDATE_GLOBAL_DATA,
+  payload: data
+})
