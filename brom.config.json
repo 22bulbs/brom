@@ -1,5 +1,5 @@
 {
-  "title": "XHR Demo Site", 
+  "title": "XHR Demo Site",
   "server":"demo/server.js",
   "port": 3000,
   "https": {
@@ -14,7 +14,7 @@
     "do-not-spy": false,
     "disable-autostart": false,
     "preserve-caching": false,
-    "write-file": ""
+    "write-dir": ""
   },
   "proxy-port": 9999,
   "results-port": 7913,
