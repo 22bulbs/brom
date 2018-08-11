@@ -49,3 +49,6 @@ store.dispatch(updateGlobalData({
 //   console.log('transaction received')
 //   store.dispatch(addTransaction(transaction));
 // });
+// socket.on('globaldata', globaldata => {
+//   store.dispatch(updateGlobalData(globaldata))
+// });
