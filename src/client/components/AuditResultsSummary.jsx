@@ -1,6 +1,17 @@
 import React from 'react';
+import DestinationDonut from './DestinationDonut';
+import MethodDonut from './MethodDonut';
+
 
 const AuditResultsSummary = ({ globalData }) => {
+  const methods = [];
+  for (let method in globalData.methods) {
+    let methodObj = {}
+    methodObj.x = method;
+    methodObj.y = globalData.methods[method];
+    methods.push(methodObj)
+  }
+
   return globalData.title ? (
   <div> 
     <div id="port-bar">
@@ -32,6 +43,9 @@ const AuditResultsSummary = ({ globalData }) => {
       <strong>Redundant: </strong>
       <span>{globalData.totals.redundant}</span>
     </p>
+    <DestinationDonut internal={globalData.totals.internal} external={globalData.totals.external} />
+    <MethodDonut methods={methods} />
+    
     </div>
 ) : <div />};
 

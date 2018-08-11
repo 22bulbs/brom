@@ -24,7 +24,13 @@ store.dispatch(updateGlobalData({
     protocol: 'http',
     methods: {
       GET: 55,
-      POST: 4
+      POST: 23,
+      DELETE: 10,
+      PUT: 33,
+      PATCH: 17,
+      JOKE: 13,
+      HAHA: 1,
+      LITTLEMORE: 4
     },
     totals: {
       transactions: 59,
@@ -42,4 +48,7 @@ store.dispatch(updateGlobalData({
 // socket.on('transaction', transaction => {
 //   console.log('transaction received')
 //   store.dispatch(addTransaction(transaction));
+// });
+// socket.on('globaldata', globaldata => {
+//   store.dispatch(updateGlobalData(globaldata))
 // });
