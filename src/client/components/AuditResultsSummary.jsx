@@ -1,5 +1,4 @@
 import React from 'react';
-import { VictoryPie, VictoryLabel } from 'victory';
 import DestinationDonut from './DestinationDonut';
 import MethodDonut from './MethodDonut';
 
