@@ -44,6 +44,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
     "cookie-parser": "^1.4.3",
     "escape-html": "^1.0.3",
     "express": "^4.16.3",
