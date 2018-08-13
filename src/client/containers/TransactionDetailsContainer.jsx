@@ -5,23 +5,19 @@ import DetailsRequestContainer from './DetailsRequestContainer.jsx';
 import DetailsResponseContainer from './DetailsResponseContainer.jsx';
 import WarningsAccordion from '../components/DetailsAccordion';
 
+
 const mapStateToProps = state => ({
-  transactions: state.transactions,
-  selectedTransactionIndex: state.selectedTransactionIndex
+  count: state.transactions.length,
+  selected: state.transactions[state.selectedTransactionIndex]
 });
 
 const mapDispatchToProps = dispatch => ({
  
 });
 
+const TransactionDetailsContainer = ({ count, selected }) => {
 
-const TransactionDetailsContainer = ({ transactions, selectedTransactionIndex }) => {
-
-  if (transactions.length === 0) return <div>State empty</div>
-
-  const selected = transactions[selectedTransactionIndex];
-
-  return (
+ return count > 0 && (
     <div id='transaction-details-container' className="flex-row">
       <div id='warnings'>
         Warning

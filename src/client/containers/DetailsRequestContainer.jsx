@@ -3,20 +3,17 @@ import { connect } from 'react-redux';
 import DetailsAccordion from '../components/DetailsAccordion.jsx';
 
 const mapStateToProps = state => ({
-  transactions: state.transactions,
-  selectedTransactionIndex: state.selectedTransactionIndex
+  count: state.transactions.length,
+  selected: state.transactions[state.selectedTransactionIndex]
 });
 
 const mapDispatchToProps = dispatch => ({
 
 });
 
-const DetailsRequestContainer = ({ transactions, selectedTransactionIndex }) => {
-  if (transactions.length === 0) return <div>State is empty.</div>
-  
-  const selected = transactions[selectedTransactionIndex];
+const DetailsRequestContainer = ({ count, selected }) => {
 
-  return (
+  return count > 0 && (
     <div className='flex-column' id='details-request-container'>
       <div id='request'>
         Request
