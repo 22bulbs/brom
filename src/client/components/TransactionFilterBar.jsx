@@ -11,27 +11,30 @@ const makeMethodsList = array => {
 }
 
 const TransactionFilterBar = ({ onMethodClick, onDomainClick, onFlagClick, methods }) => (
-  <div className='flex-row'>
-    <div id='method-filter'>
-      <select onChange={(e) => onMethodClick(e.target.value)}>
-        <option value='ALL'>All</option>
-        {makeMethodsList(methods)}
-      </select>
+  <div className='flex-row space-between'>
+    <div className="flex-row">
+      <div id='method-filter'>
+        <select onChange={(e) => onMethodClick(e.target.value)}>
+          <option selected disabled>Method</option>
+          <option value='ALL'>All</option>
+          {makeMethodsList(methods)}
+        </select>
+      </div>
+      <div id='domain-filter'>
+        <span onClick={() => onDomainClick(false)}>
+          <i className="material-icons">storage</i>
+        </span>
+        <span onClick={() => onDomainClick(true)}>
+          <i className="material-icons">public</i>
+        </span>
+      </div>
     </div>
-    <div id='domain-filter'>
-      <span onClick={() => onDomainClick(false)}>
-        <i className="material-icons">storage</i>
-      </span>
-      <span onClick={() => onDomainClick(true)}>
-        <i className="material-icons">public</i>
-      </span>
-    </div>
-    <div id='flag=filter'>
+    <div id='flag-filter'>
       {flags.map(flag => {
         return (
           <span key={flag[0]} onClick={() => onFlagClick(flag[0])}>
             <i className="material-icons">
-            {flag[1]}
+              {flag[1]}
             </i>
           </span>
         );

@@ -34,24 +34,24 @@ const makeUniqueMethods = array => {
   return [...new Set(list)];
 }
 
-const mapStateToProps = ({ 
-  transactions, 
-  selectedTransactionIndex, 
-  transactionMethodFilter, 
-  transactionDomainFilter, 
-  transactionFlagFilter 
+const mapStateToProps = ({
+  transactions,
+  selectedTransactionIndex,
+  transactionMethodFilter,
+  transactionDomainFilter,
+  transactionFlagFilter
 }) => ({
   selectedTransactionIndex,
   transactionMethodFilter,
   transactionFlagFilter,
   transactionDomainFilter,
   methods: makeUniqueMethods(transactions),
-  transactions: 
+  transactions:
     reverse(
       filter(
-      transactions, 
-      transactionMethodFilter, 
-      transactionDomainFilter, 
+      transactions,
+      transactionMethodFilter,
+      transactionDomainFilter,
       transactionFlagFilter
     )),
 });
@@ -76,7 +76,7 @@ class TransactionListContainer extends Component {
       onDomainClick,
       onFlagClick
     } = this.props;
-    
+
     return (
       <div className='flex-column' id='transaction-list-container'>
         <TransactionFilterBar
@@ -85,9 +85,9 @@ class TransactionListContainer extends Component {
           onFlagClick={onFlagClick}
           methods={methods}
         />
-        <TransactionList 
-          transactions={transactions} 
-          onTransactionClick={onTransactionClick} 
+        <TransactionList
+          transactions={transactions}
+          onTransactionClick={onTransactionClick}
           selectedTransactionIndex={selectedTransactionIndex}
         />
       </div>

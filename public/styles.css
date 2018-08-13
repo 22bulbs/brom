@@ -13,6 +13,10 @@ body {
   display: flex;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 #main-container {
   display: flex;
   width: 100%;
@@ -133,4 +137,25 @@ p {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+#method-filter, #domain-filter, #flag-filter {
+  border-right: 1px solid black;
+}
+
+#method-filter {
+  border-left: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5em;
+}
+
+#method-filter select {
+  background-color: white;
+  border: 0;
+}
+
+.material-icons {
+  pointer-events: none;
 }
