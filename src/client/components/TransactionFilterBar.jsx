@@ -1,13 +1,20 @@
 import React from 'react';
 
-const flags = ['severe', 'deprecated', 'csp', 'fp', 'redundant', 'conflicting', 'hasBody', 'cookies']
+const flags = ['severe', 'deprecated', 'csp', 'fp', 'redundant', 'conflicting', 'hasBody', 'cookies'];
+const makeMethodsList = array => {
+  return array.map(method => {
+    const lower = method.slice(1).toLowerCase();
+    const methodText = method[0].concat(lower);
+    return <option key={method} value={method}>{methodText}</option>;
+  });
+}
 
 const TransactionFilterBar = ({ onMethodClick, onDomainClick, onFlagClick, methods }) => (
   <div className='flex-row'>
     <div id='method-filter'>
       <select onChange={(e) => onMethodClick(e.target.value)}>
         <option value='ALL'>All</option>
-        {methods}
+        {makeMethodsList(methods)}
       </select>
     </div>
     <div id='domain-filter'>

@@ -16,7 +16,7 @@ const TransactionList = ({ transactions, selectedTransactionIndex, onTransaction
         onTransactionClick={onTransactionClick}
       />
     )
-  })
+  });
   return (
     <div id="transaction-list">
       {list}
