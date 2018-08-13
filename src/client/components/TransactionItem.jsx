@@ -1,8 +1,6 @@
 import React from 'react';
 
 
-
-
 const methodStyle = {
   borderRight: '1px solid black',
   width: '75px'
@@ -24,7 +22,7 @@ const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flag
         {isExternal} <span>{flags}</span>
       </div>
     </div>
-  )
-}  
+  );
+}
 
 export default TransactionItem;

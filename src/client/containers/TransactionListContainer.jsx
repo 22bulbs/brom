@@ -5,75 +5,77 @@ import TransactionList from '../components/TransactionList.jsx';
 import * as actions from '../actions/actions.js';
 
 
+const filter = (array, method, domain, filterFlags) => {
+  let filteredTransactions = array;
+  if (method !== 'ALL') {
+    filteredTransactions = filteredTransactions.filter(trans => trans.metadata.method === method);
+  }
+  if (domain !== null) {
+    filteredTransactions = filteredTransactions.filter(trans => trans.metadata.external === domain);
+  }
+  if (filterFlags.length > 0) {
+    filteredTransactions = filteredTransactions.filter(trans => {
+      const { flags } = trans.metadata;
+      for (const flag of flags) {
+        if (filterFlags.includes(flag)) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+  return filteredTransactions;
+}
 
-const mapStateToProps = state => ({
- transactions: state.transactions,
- selectedTransactionIndex: state.selectedTransactionIndex,
- transactionMethodFilter: state.transactionMethodFilter,
- transactionFlagFilter: state.transactionFlagFilter,
- transactionDomainFilter: state.transactionDomainFilter
+const reverse = (array) => [...array].reverse();
+
+const makeUniqueMethods = array => {
+  const list = array.map(transaction => transaction.metadata.method);
+  return [...new Set(list)];
+}
+
+const mapStateToProps = ({ 
+  transactions, 
+  selectedTransactionIndex, 
+  transactionMethodFilter, 
+  transactionDomainFilter, 
+  transactionFlagFilter 
+}) => ({
+  selectedTransactionIndex,
+  transactionMethodFilter,
+  transactionFlagFilter,
+  transactionDomainFilter,
+  methods: makeUniqueMethods(transactions),
+  transactions: 
+    reverse(
+      filter(
+      transactions, 
+      transactionMethodFilter, 
+      transactionDomainFilter, 
+      transactionFlagFilter
+    )),
 });
 
+const mapDispatchToProps = {
+  onTransactionClick: actions.selectTransaction,
+  onMethodClick: actions.setTransactionMethodFilter,
+  onDomainClick: actions.setTransactionDomain,
+  onFlagClick: actions.toggleTransactionFlag
+}
 
-
-const mapDispatchToProps = dispatch => ({
-  // fix selectTransaction to include some sort of permanent id property for all the transactions
- onTransactionClick: id => dispatch(actions.selectTransaction(id)),
- onMethodClick: method => dispatch(actions.setTransactionMethodFilter(method)),
- onDomainClick: domain => dispatch(actions.setTransactionDomain(domain)),
- onFlagClick: flag => dispatch(actions.toggleTransactionFlag(flag))
-});
 
 class TransactionListContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const {
+      transactions,
       selectedTransactionIndex,
-      transactionMethodFilter,
-      transactionFlagFilter,
-      transactionDomainFilter,
+      methods,
       onTransactionClick,
       onMethodClick,
       onDomainClick,
       onFlagClick
     } = this.props;
-    let { transactions } = this.props;
-
-    const makeMethodsList = (array) => {
-      const list = array.map((transaction) => transaction.metadata.method);
-      return [...new Set(list)].map(method => {
-        const lower = method.slice(1).toLowerCase();
-        const methodText = method[0].concat(lower);
-        return <option key={method} value={method}>{methodText}</option>
-      });    
-    }
-    const filter = (array) => {
-      let filteredTransactions = array;
-      if (transactionMethodFilter !== 'ALL') {
-        filteredTransactions =  filteredTransactions.filter(trans => trans.metadata.method === transactionMethodFilter);
-      }
-      if (transactionFlagFilter.length > 0) {
-        filteredTransactions = filteredTransactions.filter(trans => {
-          const { flags }  = trans.metadata;
-          for (const flag of flags) {
-            if (transactionFlagFilter.includes(flag)) return true;
-          }
-          return false;
-        });
-      }
-      if (transactionDomainFilter !== null) {
-        filteredTransactions = filteredTransactions.filter(trans => trans.metadata.external === transactionDomainFilter);
-      }
-      return filteredTransactions;
-    }
-    const reverse = (array) => [...array].reverse();
-
-    const methods = makeMethodsList(transactions);
-    transactions = reverse(filter(transactions));
-    
     
     return (
       <div className='flex-column' id='transaction-list-container'>
