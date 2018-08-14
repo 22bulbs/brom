@@ -358,6 +358,49 @@ export const sampleData = [
       }
     }
   }
+];
+
+export const singleSampleTransaction = [
+  {
+    "metadata": {
+      "url": "/signup/",
+      "method": "POST",
+      "api": "n/a",
+      "external": true,
+      "flags": [
+        "severe", "fp"
+      ]
+    },
+    "request": {
+      "headers": {},
+      "body": "",
+      "cookies": []
+    },
+    "response": {
+      "statusCode": 302,
+      "headers": {
+        "x-powered-by": "Express",
+        "location": "/",
+        "vary": "Accept",
+        "content-type": "text/plain; charset=utf-8",
+        "content-length": "23",
+        "date": "Thu, 02 Aug 2018 05:40:43 GMT",
+        "connection": "close"
+      },
+      "body": "Found. Redirecting to /",
+      "setCookie": [],
+      "contentSecurityPolicy": {},
+      "featurePolicy": {}
+    },
+    "warnings": {
+      "req": {},
+      "res": {
+        "x-powered-by": [
+          "x-powered-by header should not be sent."
+        ]
+      }
+    }
+  }
 ]
 
 

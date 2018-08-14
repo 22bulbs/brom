@@ -3,6 +3,7 @@ responses.json
 .DS_Store
 dist/
 .vscode/
+coverage
 
 # Sample data output
 responses.json
