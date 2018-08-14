@@ -14,7 +14,12 @@ export const sampleData = [
         "content-type": "application/json",
       },
       "body": "This is a sample body that we will render in a request",
-      "cookies": []
+      "cookies": [
+        {
+          "name": "hello",
+          "value": "world!"
+        }
+      ]
     },
     "response": {
       "statusCode": 200,
