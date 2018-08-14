@@ -44,7 +44,7 @@ export const transactionFlagFilter = (state = [], action) => {
     // but if the flag is already in the flags array, remove it.
       return [
         ...state.slice(0, index),
-        ...state.slice(index + 1)
+        ...state.slice(index + 1),
       ];
     default:
       return state;
