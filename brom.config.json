@@ -19,6 +19,8 @@
   "proxy-port": 9999,
   "results-port": 7913,
   "ignore-rules": [
+  ],
+  "halt-on": [
     "include-csp"
   ]
 }
