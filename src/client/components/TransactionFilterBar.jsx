@@ -1,12 +1,14 @@
 import React from 'react';
 import Icon from './Icon';
 
-const flags = ['severe', 'deprecated', 'conflicting', 'redundant', 'csp', 'fp', 'hasBod'];
+
+const flags = ['severe', 'deprecated', 'conflicting', 'redundant', 'csp', 'fp', 'hasBody'];
 const makeMethodsList = array => array.map((method) => {
   const lower = method.slice(1).toLowerCase();
   const methodText = method[0].concat(lower);
   return <option key={method} value={method}>{methodText}</option>;
 });
+
 
 const TransactionFilterBar = ({
   onMethodClick,
