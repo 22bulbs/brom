@@ -6,14 +6,18 @@ const SetCookieDisplay = ({ policy }) => (
     <p><strong>Set-Cookie</strong></p>
     {
       policy.map(({ name, value, ...details }) => (
-        <div>
+        <div key={`${name}${value}`}>
           <p><Icon flag="setCookie" /><strong>{name}={value}</strong></p>
           {Object.keys(details).map(el =>
-            <p><strong>{el}:</strong> {details[el]}</p>)}
+            <CookieDetails key={el} name={el} value={details[el]} />)}
         </div>
       ))
     }
   </div>
+);
+
+const CookieDetails = ({ name, value }) => (
+  <p key={name}><strong>{name}:</strong> {value}</p>
 );
 
 export default SetCookieDisplay;
