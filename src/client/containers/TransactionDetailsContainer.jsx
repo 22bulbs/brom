@@ -19,9 +19,12 @@ const TransactionDetailsContainer = ({ count, selected }) => {
 
   return count > 0 && (
     <div>
-      <div id='warnings'>
-        Warning
-        <WarningsAccordion text={JSON.stringify(selected.warnings.res)} id="warnings" />
+      <div id='warnings-accordion'>
+        <h3 style={{ margin: '.5em 0' }}>Warnings</h3>
+        <WarningsAccordion
+          textObject={selected.warnings.res}
+          id="warnings"
+        />
       </div>
       <div id='transaction-details-container' className="flex-row">
         <DetailsRequestContainer />

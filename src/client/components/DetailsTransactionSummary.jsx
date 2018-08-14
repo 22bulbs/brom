@@ -21,8 +21,9 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
       <div className="method">
         <h1>{selectedTransaction.metadata.method} </h1>
       </div>
-      <div className="route">
-        {selectedTransaction.metadata.url} {flags}
+      <div className="flex-row space-between route">
+        <div>{selectedTransaction.metadata.url}</div>
+        <div>{flags}</div>
 
       </div>
     </div>
