@@ -1,7 +1,7 @@
 import * as types from '../constants/actionTypes';
 
 let nextTransactionId = 0;
-const addIndex = object => ({
+export const addIndex = object => ({
   ...object, 
   id: nextTransactionId++
 });

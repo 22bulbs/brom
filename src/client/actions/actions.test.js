@@ -97,9 +97,6 @@ describe('addTransaction action creator', () => {
   test('creates an action with a type and payload of a single transaction', () => {
     expect(actions.addTransaction(sampleTransaction)).toEqual(sampleTransactionAction);
   });
-});
-
-describe('addTransaction action creator', () => {
   test('creates an action with type="ADD_TRANSACTION" and payload of an array of transaction objects', () => {
     expect(actions.addTransaction(sampleData)).toEqual({
       type: types.ADD_TRANSACTION,
@@ -107,6 +104,7 @@ describe('addTransaction action creator', () => {
     });
   });
 });
+
 
 describe('selectTransaction action creator', () => {
   test('creates an action with type "SELECT_TRANSACTION" and payload of passed in integer value', () => {
