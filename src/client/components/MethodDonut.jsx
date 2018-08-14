@@ -11,7 +11,7 @@ const MethodDonut = ({methods}) => (
         renderInPortal={false}
         width={400} height={400}
         data={methods}
-        animate={{duration: 500}}
+        animate={{duration: 200}}
         innerRadius={130} labelRadius={10000} radius={200}
         style={{ labels: { fontSize: 30, fill: "white" },
           data: { fill: (d) => colorMap(d.x) }}}
