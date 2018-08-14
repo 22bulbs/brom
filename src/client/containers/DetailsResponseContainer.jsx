@@ -23,8 +23,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapOverHeaders = headers =>
-  Object.keys(headers).map(el =>
-    <SimpleAccordion title={upCase(el)} value={headers[el]} />);
+  Object.keys(headers).map(el => (
+    <SimpleAccordion
+      key={upCase(el)}
+      title={upCase(el)}
+      value={headers[el]}
+    />));
 
 const DetailsResponseContainer = ({ count, selected }) => {
   const { response } = selected;
