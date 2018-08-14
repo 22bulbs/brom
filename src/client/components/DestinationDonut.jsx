@@ -6,7 +6,7 @@ const DestinationDonut = ({internal, external}) => (
     <svg viewBox="0 0 400 400" width="160" height="160">
       <VictoryPie
         standalone={false}
-        animate={{duration: 500}}
+        animate={{duration: 200}}
         renderInPortal={false}
         width={400} height={400}
         data={[
