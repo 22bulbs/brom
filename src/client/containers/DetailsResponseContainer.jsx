@@ -1,8 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DetailsAccordion from '../components/DetailsAccordion.jsx';
-import SimpleHeaderDisplay from '../components/SimpleHeaderDisplay';
+import DetailsAccordion from '../components/DetailsAccordion';
+import SimpleAccordion from '../components/SimpleAccordion';
+import CSPDisplay from '../components/CSPDisplay';
+import FPDisplay from '../components/FPDisplay';
+import SetCookieDisplay from '../components/SetCookieDisplay';
+import CookiesDisplay from '../components/CookiesDisplay';
 import objectHasKey from '../utils/objectHasKey';
+
+const upCase = string => string.replace(
+  /\b\w/g,
+  match => match.toUpperCase(),
+);
 
 const mapStateToProps = state => ({
   count: state.transactions.length,
@@ -15,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapOverHeaders = headers =>
   Object.keys(headers).map(el =>
-    <SimpleHeaderDisplay header={el} value={headers[el]} />);
+    <SimpleAccordion title={upCase(el)} value={headers[el]} />);
 
 const DetailsResponseContainer = ({ count, selected }) => {
   const { response } = selected;
@@ -27,18 +36,17 @@ const DetailsResponseContainer = ({ count, selected }) => {
 
   return count > 0 && (
     <div className='flex-column' id='details-response-container'>
-      <div id='response'>
-        Request
-      </div>
-      {hasCSP && <p>CSP</p>}
-      {hasFP && <p>FP</p>}
-      {hasSetCookie && <p>SetCookie</p>}
-      {hasCookies && <p>Cookies</p>}
+      <p className="border-bottom" id='response'><strong>Response</strong></p>
+      {hasCSP &&
+        <CSPDisplay policy={response.contentSecurityPolicy} />}
+      {hasFP &&
+        <FPDisplay policy={response.featurePolicy} />}
+      {hasSetCookie &&
+        <SetCookieDisplay policy={response.setCookie} />}
+      {hasCookies &&
+        <CookiesDisplay cookies={response.cookies} />}
       {mapOverHeaders(response.headers)}
-      <div className='flex-column' id='body'>
-        Body <br />
-        {response.body}
-      </div>
+      <SimpleAccordion title="Body" value={response.body} />
     </div>
   )
 }
