@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from './icon';
 
 
 const methodStyle = {
@@ -21,7 +22,18 @@ const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flag
       <div className="transaction-item-endpoint">
         <p>{url}</p>
         <div className="transaction-item-icons">
-          <span>{isExternal}</span> <span>{flags}</span>
+          <span>
+            <Icon flag={isExternal} />
+          </span> 
+          <span>
+            {flags.map(flag => {
+              return (
+                <span key={flag}>
+                  <Icon flag={flag} />
+                </span>
+              );
+            })}
+          </span>
         </div>
       </div>
     </div>
