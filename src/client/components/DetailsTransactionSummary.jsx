@@ -1,10 +1,12 @@
 import React from 'react';
 
 const DetailsTransactionSummary = ({ selectedTransaction }) => {
-  
-  if (!selectedTransaction) return (
-    <div>State is Empty. Try Again Later.</div>
-  )
+
+  if (!selectedTransaction) {
+    return (
+      <h3>No transactions yet! Visit your site to start recording.</h3>
+    );
+  }
   const flags = selectedTransaction.metadata.flags.map(flag => {
     return (
       flag
@@ -19,9 +21,10 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
       <div className="method">
         <h1>{selectedTransaction.metadata.method} </h1>
       </div>
-      <div className="route">
-        {selectedTransaction.metadata.url} {flags}
-        
+      <div className="flex-row space-between route">
+        <div>{selectedTransaction.metadata.url}</div>
+        <div>{flags}</div>
+
       </div>
     </div>
   )

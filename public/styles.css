@@ -40,8 +40,8 @@ body {
 }
 
 #details-transaction-summary {
-  border: 1px black solid;
-  width: 100%;
+  padding: 0.5em;
+  border-bottom: 1px black solid;
   min-height: 20%;
   justify-content: flex-end;
 }
@@ -51,23 +51,24 @@ body {
   justify-self: flex-start;
 }
 
-#warnings {
-  width: 100%;
-  border: 1px black solid;
-}
-
-#request {
-  border: 1px black solid;
-  width: 150px;
+#warnings-accordion {
+  padding: .5em 1em;
+  border-bottom: 1px black solid;
 }
 
 #details-response-container {
-  border: 1px black solid;
-  width: 148.5px;
+  width: 50%;
+}
+
+#details-request-container {
+  width: 50%;
+}
+
+#request, #response {
+  padding-left: .5em;
 }
 
 #warning {
-
   width: 300px;
 }
 
@@ -116,7 +117,7 @@ h3 {
 }
 
 p {
-  margin: 0;
+  margin: 0.25em 0;
 }
 
 .numbers {
@@ -156,6 +157,18 @@ p {
   border: 0;
 }
 
-.material-icons {
-  pointer-events: none;
+.border-bottom {
+  border-bottom: 1px solid black;
+}
+
+.border-right {
+  border-right: 1px solid black;
+}
+
+.simple-accordion {
+  padding-left: 0.5em;
+}
+
+.cookies, .set-cookie, .fp, .csp {
+  padding-left: 0.5em;
 }
