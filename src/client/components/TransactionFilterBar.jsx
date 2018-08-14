@@ -1,7 +1,8 @@
 import React from 'react';
+import Icon from './icon';
 
-
-const flags = [['severe', 'report'], ['deprecated', 'warning'], ['csp', 'security'], ['fp', 'important_devices'], ['redundant', 'done_all'], ['conflicting', 'compare_arrows'], ['hasBod', 'description']]
+// const flags = [['severe', 'report'], ['deprecated', 'warning'], ['csp', 'security'], ['fp', 'important_devices'], ['redundant', 'done_all'], ['conflicting', 'compare_arrows'], ['hasBod', 'description']]
+const flags = ['severe', 'deprecated', 'conflicting', 'redundant', 'csp', 'fp', 'hasBod']
 const makeMethodsList = array => {
   return array.map(method => {
     const lower = method.slice(1).toLowerCase();
@@ -22,20 +23,18 @@ const TransactionFilterBar = ({ onMethodClick, onDomainClick, onFlagClick, metho
       </div>
       <div id='domain-filter'>
         <span onClick={() => onDomainClick(false)}>
-          <i className="material-icons">storage</i>
+          <Icon flag="internal" />
         </span>
         <span onClick={() => onDomainClick(true)}>
-          <i className="material-icons">public</i>
+          <Icon flag="external" />
         </span>
       </div>
     </div>
     <div id='flag-filter'>
       {flags.map(flag => {
         return (
-          <span key={flag[0]} onClick={() => onFlagClick(flag[0])}>
-            <i className="material-icons">
-              {flag[1]}
-            </i>
+          <span key={flag} onClick={() => onFlagClick(flag)}>
+            <Icon flag={flag} />
           </span>
         );
       })}

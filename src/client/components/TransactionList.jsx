@@ -8,8 +8,8 @@ const TransactionList = ({ transactions, selectedTransactionIndex, onTransaction
       <TransactionItem
         method={trans.metadata.method}
         url={trans.metadata.url}
-        isExternal={trans.metadata.external ? 'External' : 'Internal'}
-        flags={trans.metadata.flags.join(' ')}
+        isExternal={trans.metadata.external ? 'external' : 'internal'}
+        flags={trans.metadata.flags}
         key={`trans${index}`}
         id={trans.id}
         isSelected={(selectedTransactionIndex === trans.id)}

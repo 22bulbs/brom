@@ -1,5 +1,6 @@
 import React from 'react';
 import LabeledText from './LabeledText';
+import Icon from './Icon';
 
 const PortBar = ({ app, proxy, results }) => (
   <div id="port-bar">
@@ -10,7 +11,7 @@ const PortBar = ({ app, proxy, results }) => (
         <LabeledText label="Proxy Port" text={proxy} />|
         <LabeledText label="Results Port" text={results} />
       </span>
-      <i>autorenew</i>
+      <Icon flag="connected" />
     </div>
   </div>
 );
