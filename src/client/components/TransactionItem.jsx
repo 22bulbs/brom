@@ -1,17 +1,19 @@
 import React from 'react';
 import Icon from './Icon';
+import colorMap from '../utils/colorMap'
 
-
-const methodStyle = {
-  borderRight: '1px solid black',
-  width: '75px',
-  textAlign: 'center',
-}
 
 const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flags, isSelected }) => {
   const itemStyle = {
     borderBottom: '1px solid black',
     color: (isSelected) ? 'red' : '#fff4e5',
+  }
+
+  const methodStyle = {
+    borderRight: '1px solid black',
+    width: '75px',
+    textAlign: 'center',
+    backgroundColor: colorMap(method)
   }
 
   return (
