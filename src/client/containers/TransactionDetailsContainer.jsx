@@ -12,19 +12,21 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
- 
+
 });
 
 const TransactionDetailsContainer = ({ count, selected }) => {
 
- return count > 0 && (
-    <div id='transaction-details-container' className="flex-row">
+  return count > 0 && (
+    <div>
       <div id='warnings'>
         Warning
         <WarningsAccordion text={JSON.stringify(selected.warnings.res)} id="warnings" />
       </div>
-      <DetailsRequestContainer />
-      <DetailsResponseContainer />
+      <div id='transaction-details-container' className="flex-row">
+        <DetailsRequestContainer />
+        <DetailsResponseContainer />
+      </div>
     </div>
   )
 }

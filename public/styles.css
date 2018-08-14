@@ -56,18 +56,15 @@ body {
   border: 1px black solid;
 }
 
-#request {
-  border: 1px black solid;
-  width: 150px;
+#details-response-container {
+  width: 50%;
 }
 
-#details-response-container {
-  border: 1px black solid;
-  width: 148.5px;
+#details-request-container {
+  width: 50%;
 }
 
 #warning {
-
   width: 300px;
 }
 

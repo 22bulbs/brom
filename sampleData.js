@@ -10,7 +10,9 @@ export const sampleData = [
       ]
     },
     "request": {
-      "headers": {},
+      "headers": {
+        "content-type": "application/json",
+      },
       "body": "This is a sample body that we will render in a request",
       "cookies": []
     },
