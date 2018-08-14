@@ -11,7 +11,7 @@ const methodStyle = {
 const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flags, isSelected }) => {
   const itemStyle = {
     borderBottom: '1px solid black',
-    color: (isSelected) ? 'red' : 'black',
+    color: (isSelected) ? 'red' : '#fff4e5',
   }
 
   return (
