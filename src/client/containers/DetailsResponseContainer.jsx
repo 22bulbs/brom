@@ -50,7 +50,7 @@ const DetailsResponseContainer = ({ count, selected }) => {
       {hasCookies &&
         <CookiesDisplay cookies={response.cookies} />}
       {mapOverHeaders(response.headers)}
-      <SimpleAccordion title="Body" value={response.body} />
+      <SimpleAccordion title="Body" value={JSON.stringify(response.body)} />
     </div>
   )
 }
