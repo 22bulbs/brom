@@ -1,52 +1,78 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
 import DestinationDonut from './DestinationDonut';
 import MethodDonut from './MethodDonut';
+import PortBar from './PortBar';
+import LabeledText from './LabeledText';
 
 
-const AuditResultsSummary = ({ globalData }) => {
-  const methods = [];
-  for (let method in globalData.methods) {
-    let methodObj = {}
-    methodObj.x = method;
-    methodObj.y = globalData.methods[method];
-    methods.push(methodObj)
+const AuditResultsSummary = ({
+  ports,
+  title,
+  protocol,
+  methods,
+  totals,
+}) => {
+  const methodData = [];
+  for (const method in methods) {
+    methodData.push({
+      x: method,
+      y: methods[method],
+    });
   }
 
-  return globalData.title ? (
-  <div> 
-    <div id="port-bar">
-      <span>brom</span>
-      <span><strong>Application Port:</strong> {globalData['application-port']}  
-      <strong>Proxy Port:</strong> {globalData['proxy-port']}  
-      <strong>Results Port:</strong> {globalData['results-port']}</span>
-      <i>autorenew</i>
+  return title ? (
+    <div className="audit-results">
+      <PortBar {...ports} />
+      <div className="title-info">
+        <h1 id="app-title">{title}</h1>
+        <p>
+          <LabeledText label="Protocol" text={protocol} />
+        </p>
+      </div>
+      <div className="global-data">
+        <div className="numbers">
+          <p>
+            <span style={{ fontSize: '3em' }}>
+              {totals.transactions}
+            </span>
+            <strong>Transactions</strong>
+          </p>
+          <p>
+            <LabeledText
+              label="Potential Vulnerabilities"
+              text={totals.severe}
+            />
+          </p>
+          <p>
+            <LabeledText
+              label="Deprecated"
+              text={totals.deprecated}
+            />
+          </p>
+          <p>
+            <LabeledText
+              label="Conflicting"
+              text={totals.conflicting}
+            />
+          </p>
+          <p>
+            <LabeledText
+              label="Redundant"
+              text={totals.redundant}
+            />
+          </p>
+        </div>
+        <div className="charts">
+          <MethodDonut methods={methodData} />
+          <DestinationDonut
+            internal={totals.internal}
+            external={totals.external}
+          />
+        </div>
+      </div>
     </div>
-    <div id="app-title">{globalData.title}</div>
-    <p>
-      <strong>Protocol: </strong>
-      <span>{globalData.protocol}</span>
-    </p>
-    <div><span>{globalData.totals.transactions}</span> <strong>Transactions</strong></div>
-    <p>
-      <strong>Severe Vulnerabilities: </strong>
-      <span>{globalData.totals.severe}</span>
-    </p>
-    <p>
-      <strong>Deprecated: </strong>
-      <span>{globalData.totals.deprecated}</span>
-    </p>
-    <p>
-      <strong>Conflicting: </strong>
-      <span>{globalData.totals.conflicting}</span>
-    </p>
-    <p>
-      <strong>Redundant: </strong>
-      <span>{globalData.totals.redundant}</span>
-    </p>
-    <DestinationDonut internal={globalData.totals.internal} external={globalData.totals.external} />
-    <MethodDonut methods={methods} />
-    
-    </div>
-) : <div />};
+  ) : <div />;
+};
 
 export default AuditResultsSummary;

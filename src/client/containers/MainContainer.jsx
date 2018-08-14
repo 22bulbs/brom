@@ -23,11 +23,11 @@ const mapDispatchToProps = dispatch => ({
 const MainContainer = ({ transactions, selectedTransactionIndex, globalData }) => {
 
   const selectedTransaction = transactions[selectedTransactionIndex];
-  
+
   return (
     <div id='main-container'>
       <div className='flex-column' id='left-hand-side'>
-        <AuditResultsSummary globalData={globalData} />
+        <AuditResultsSummary {...globalData} />
         <TransactionListContainer />
       </div>
       <div className='flex-column' id='right-hand-side'>

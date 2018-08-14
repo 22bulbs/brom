@@ -1,11 +1,11 @@
 import React from 'react';
-import TransactionItem from './TransactionItem'; 
+import TransactionItem from './TransactionItem';
 
 
 const TransactionList = ({ transactions, selectedTransactionIndex, onTransactionClick }) => {
   const list = transactions.map((trans, index) => {
     return (
-      <TransactionItem 
+      <TransactionItem
         method={trans.metadata.method}
         url={trans.metadata.url}
         isExternal={trans.metadata.external ? 'External' : 'Internal'}
@@ -18,7 +18,13 @@ const TransactionList = ({ transactions, selectedTransactionIndex, onTransaction
     )
   });
   return (
-    <div id="transaction-list">
+    <div
+      id="transaction-list"
+      style={{
+        border: '1px solid black',
+        borderBottom: 0,
+      }}
+    >
       {list}
     </div>
   )
