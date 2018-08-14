@@ -7,3 +7,4 @@ brom.config.json
 .eslintrc.js
 .babelrc
 .gitignore
+coverage

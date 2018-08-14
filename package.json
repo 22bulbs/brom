@@ -4,7 +4,7 @@
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "start:dev": "webpack-dev-server --mode development",
     "build": "webpack --mode development",
     "prod": "webpack"
@@ -25,11 +25,14 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "23.4.2",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "jest": "23.5.0",
+    "jest-cli": "23.5.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
@@ -42,6 +45,8 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "ajv": "6.5.2",
+    "ajv-keywords": "3.2.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
