@@ -10,14 +10,17 @@ const DestinationDonut = ({internal, external}) => (
         renderInPortal={false}
         width={400} height={400}
         data={[
-          { x: 'External', y: external}, { x: 'Internal', y: internal }
+          { x: 'External', y: external, fill: 'blue'}, { x: 'Internal', y: internal }
         ]}
         innerRadius={130} labelRadius={150} radius={200}
-        style={{ labels: { fontSize: 0, fill: "white" } }}
+        style={{ labels: { fontSize: 0, fill: "white" },
+          data: { fill: d => {
+            return d.x === 'Internal' ? '#EAC38E' : '#FFF4E5'
+          }}}}
       />
       <VictoryLabel
         textAnchor="middle"
-        style={{ fontSize: 30 }}
+        style={{ fontSize: 30, fill: "#FFF4E5", fontFamily: "roboto"}}
         x={200} y={200}
         text={internal + ' / ' + external}
       />

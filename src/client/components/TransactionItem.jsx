@@ -6,14 +6,15 @@ import colorMap from '../utils/colorMap'
 const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flags, isSelected }) => {
   const itemStyle = {
     borderBottom: '1px solid black',
-    color: (isSelected) ? 'red' : '#fff4e5',
+    backgroundColor: (isSelected) ? '#5C5A63' : '#3d3c42',
   }
 
   const methodStyle = {
     borderRight: '1px solid black',
     width: '75px',
     textAlign: 'center',
-    backgroundColor: colorMap(method)
+    backgroundColor: colorMap(method),
+    color: 'black'
   }
 
   return (

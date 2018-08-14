@@ -9,15 +9,15 @@ const nameToGrey = (name) => {
 const colorMap = (name) => {
   switch (name) {
     case "GET":
-      return '#A29EB5'
+      return '#AB92B5'
     case "POST":
       return '#649CFF'
     case "PATCH":
-      return '#AC9BFF'
+      return '#CCC0B8'
     case "DELETE":
       return '#D15F5C'
     case "PUT":
-      return '#9E9555'
+      return '#665C97'
     default:
       return nameToGrey(name);
   }
