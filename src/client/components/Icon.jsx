@@ -7,7 +7,7 @@ const icons = {
   fp: 'important_devices', 
   redundant: 'done_all', 
   conflicting: 'compare_arrows', 
-  hasBod: 'description',
+  hasBody: 'description',
   internal: 'storage',
   external: 'public',
   cookies: 'vpn_key',

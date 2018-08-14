@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from './Icon';
 
 // const flags = [['severe', 'report'], ['deprecated', 'warning'], ['csp', 'security'], ['fp', 'important_devices'], ['redundant', 'done_all'], ['conflicting', 'compare_arrows'], ['hasBod', 'description']]
-const flags = ['severe', 'deprecated', 'conflicting', 'redundant', 'csp', 'fp', 'hasBod']
+const flags = ['severe', 'deprecated', 'conflicting', 'redundant', 'csp', 'fp', 'hasBody']
 const makeMethodsList = array => {
   return array.map(method => {
     const lower = method.slice(1).toLowerCase();
