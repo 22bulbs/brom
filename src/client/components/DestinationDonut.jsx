@@ -10,7 +10,7 @@ const DestinationDonut = ({internal, external}) => (
         renderInPortal={false}
         width={400} height={400}
         data={[
-          { x: 'External', y: external, fill: 'blue'}, { x: 'Internal', y: internal }
+          { x: 'External', y: external }, { x: 'Internal', y: internal }
         ]}
         innerRadius={130} labelRadius={150} radius={200}
         style={{ labels: { fontSize: 0, fill: "white" },
