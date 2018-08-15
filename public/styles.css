@@ -53,7 +53,7 @@ strong {
 
 #details-transaction-summary {
   padding: 0.5em;
-  border-bottom: 1px black solid;
+  border-bottom: 4px solid;
   min-height: 20%;
   justify-content: flex-end;
 }
