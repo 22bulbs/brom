@@ -10,14 +10,15 @@ class CustomLabel extends Component {
         <VictoryLabel {...this.props}/>
         <VictoryTooltip
           {...this.props}
-          x={200} y={300}
+          x={200} y={325}
           renderInPortal={false}
           text={this.props.text}
+          style={{ fontSize: 30, fill: "#FFF4E5", fontFamily: "roboto"}}
           orientation="top"
           pointerLength={0}
-          cornerRadius={100}
-          width={200}
-          height={200}
+          cornerRadius={125}
+          width={250}
+          height={250}
           flyoutStyle={{ fill: colorMap(method), stroke: 0}}
         />
       </g>
