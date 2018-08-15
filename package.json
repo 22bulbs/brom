@@ -2,7 +2,7 @@
   "name": "brom",
   "version": "0.1.9",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "./lib/utils/parse-headers.js",
   "scripts": {
     "test": "jest --coverage",
     "start:dev": "webpack-dev-server --mode development",
