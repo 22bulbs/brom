@@ -40,7 +40,7 @@ const DetailsResponseContainer = ({ count, selected }) => {
 
   return count > 0 && (
     <div className='flex-column' id='details-response-container'>
-      <p className="border-bottom" id='response'><strong>Response</strong></p>
+      <div className="border-bottom light-bg" id='response'><p><strong>Response</strong></p></div>
       {hasCSP &&
         <CSPDisplay policy={response.contentSecurityPolicy} />}
       {hasFP &&

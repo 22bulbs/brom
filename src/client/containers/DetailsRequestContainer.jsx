@@ -39,7 +39,7 @@ const DetailsRequestContainer = ({ count, selected }) => {
 
   return count > 0 && (
     <div className='flex-column border-right' id='details-request-container'>
-      <p className="border-bottom" id='request'><strong>Request</strong></p>
+      <div className="border-bottom light-bg" id='request'><p><strong>Request</strong></p></div>
       {hasCSP &&
         <CSPDisplay policy={request.contentSecurityPolicy} />}
       {hasFP &&

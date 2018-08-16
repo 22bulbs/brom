@@ -15,13 +15,8 @@ const filter = (array, method, domain, filterFlags) => {
   }
   if (filterFlags.length > 0) {
     filteredTransactions = filteredTransactions.filter(trans => {
-      const { flags } = trans.metadata;
-      for (const flag of flags) {
-        if (filterFlags.includes(flag)) {
-          return true;
-        }
-      }
-      return false;
+      const transFlags = trans.metadata.flags;
+      return filterFlags.every(flag => transFlags.includes(flag))
     });
   }
   return filteredTransactions;
@@ -70,11 +65,13 @@ class TransactionListContainer extends Component {
     const {
       transactions,
       selectedTransactionIndex,
+      transactionFlagFilter,
+      transactionDomainFilter,
       methods,
       onTransactionClick,
       onMethodClick,
       onDomainClick,
-      onFlagClick
+      onFlagClick,
     } = this.props;
 
     return (
@@ -84,6 +81,8 @@ class TransactionListContainer extends Component {
           onDomainClick={onDomainClick}
           onFlagClick={onFlagClick}
           methods={methods}
+          selectedFlags={transactionFlagFilter}
+          selectedDomain={transactionDomainFilter}
         />
         <TransactionList
           transactions={transactions}

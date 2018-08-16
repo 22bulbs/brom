@@ -3,7 +3,7 @@ import LabeledText from './LabeledText';
 import Icon from './Icon';
 
 const PortBar = ({ app, proxy, results }) => (
-  <div id="port-bar">
+  <div id="port-bar" className="border-bottom light-bg">
     <span id="brom-title">brom</span>
     <div>
       <span>

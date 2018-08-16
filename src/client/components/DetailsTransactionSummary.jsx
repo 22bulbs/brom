@@ -12,7 +12,7 @@ const DetailsTransactionSummary = ({ selectedTransaction }) => {
   const flags = selectedTransaction.metadata.flags
 
   return (
-    <div id="details-transaction-summary" className="flex-column" style={{ borderColor: colorMap(selectedTransaction.metadata.method)}}>
+    <div id="details-transaction-summary" className="flex-column light-bg" style={{ borderColor: colorMap(selectedTransaction.metadata.method)}}>
       <div id="internal-external-dts">
         <Icon flag={selectedTransaction.metadata.external ? 'external' : 'internal'} />
       </div>

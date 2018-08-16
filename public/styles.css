@@ -16,6 +16,10 @@ strong {
   color: #649cff;
 }
 
+.warnings-text {
+  color: #D15F5C;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -183,4 +187,8 @@ p {
 
 .cookies, .set-cookie, .fp, .csp {
   padding-left: 0.5em;
+}
+
+.light-bg {
+  background-color: #504F57
 }
