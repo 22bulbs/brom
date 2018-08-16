@@ -18,7 +18,7 @@ const TransactionFilterBar = ({
   selectedFlags,
   selectedDomain
 }) => (
-  <div className="flex-row space-between light-bg">
+  <div className="flex-row space-between transaction-filter light-bg">
     <div className="flex-row">
       <div id="method-filter">
         <select

@@ -33,6 +33,10 @@ strong {
   justify-content: space-between;
 }
 
+.transaction-filter {
+  flex-shrink: 0;
+}
+
 #main-container {
   display: flex;
   width: 100%;
@@ -40,26 +44,25 @@ strong {
 
 #left-hand-side {
   min-width: 50%;
-  height: 100%;
+  height: 100vh;
 }
 
 #right-hand-side {
-  min-width: 50%;
-  max-width: 50%;
-  height: 100%;
+  width:50%;
+  height: 100vh;
 }
 
-#transactionDetailsContainer {
+#transaction-details-container {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
+  overflow-y: auto;
 }
 
 #details-transaction-summary {
   padding: 0.5em;
   border-bottom: 4px solid;
-  min-height: 20%;
   justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 #internal-external-dts {
@@ -101,6 +104,10 @@ strong {
 
 #brom-title {
   font-size: 1.25em;
+}
+
+#transaction-list {
+  overflow-y: scroll;
 }
 
 .global-data {
@@ -171,6 +178,10 @@ p {
 #method-filter select {
   background-color: white;
   border: 0;
+}
+
+.header-list {
+  overflow-y: scroll;
 }
 
 .border-bottom {

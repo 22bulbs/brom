@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 const TransactionDetailsContainer = ({ count, selected }) => {
 
   return count > 0 && (
-    <div>
+    <div className="flex-column">
       <div id='warnings-accordion' className='light-bg'>
         <h3 style={{ margin: '.5em 0' }} className='warnings-text'>Warnings</h3>
         <WarningsAccordion
