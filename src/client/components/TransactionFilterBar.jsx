@@ -34,23 +34,23 @@ const TransactionFilterBar = ({
         <span style={{
           color: selectedDomain === true || null ? "#BFB7AC" : "#fff4e5"
         }} onClick={() => onDomainClick(false)}>
-          <Icon flag="internal" />
+          <Icon tooltip flag="internal" />
         </span>
         <span style={{
           color: selectedDomain === false || null ? "#BFB7AC" : "#fff4e5"
         }} onClick={() => onDomainClick(true)}>
-          <Icon flag="external" />
+          <Icon tooltip flag="external" />
         </span>
       </div>
     </div>
-    <div id="flag-filter">
+    <div id="flag-filter" className="filter-flags">
       {flags.map(flag => {
         const selectStatus = {
           color: selectedFlags.includes(flag) ? "#fff4e5" : "#BFB7AC"
         }
         return (
         <span style={selectStatus} key={flag} onClick={() => onFlagClick(flag)}>
-          <Icon  flag={flag} />
+          <Icon  tooltip flag={flag} />
         </span>
         )})}
     </div>

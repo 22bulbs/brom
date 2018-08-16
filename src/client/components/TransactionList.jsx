@@ -21,7 +21,7 @@ const TransactionList = ({ transactions, selectedTransactionIndex, onTransaction
     <div
       id="transaction-list"
       style={{
-        border: '1px solid black',
+        borderTop: '1px solid black',
         borderBottom: 0,
       }}
     >

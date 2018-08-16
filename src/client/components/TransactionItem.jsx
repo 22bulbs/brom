@@ -28,7 +28,7 @@ const TransactionItem = ({ id, onTransactionClick, method, url, isExternal, flag
           <span>
             <Icon flag={isExternal} />
           </span> 
-          <span>
+          <span className="item-flags">
             {flags.map(flag => {
               return (
                 <span key={flag}>

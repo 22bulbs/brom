@@ -5,7 +5,7 @@ import TransactionList from '../components/TransactionList.jsx';
 import * as actions from '../actions/actions.js';
 
 
-const filter = (array, method, domain, filterFlags) => {
+export const filter = (array, method, domain, filterFlags) => {
   let filteredTransactions = array;
   if (method !== 'ALL') {
     filteredTransactions = filteredTransactions.filter(trans => trans.metadata.method === method);
@@ -22,9 +22,9 @@ const filter = (array, method, domain, filterFlags) => {
   return filteredTransactions;
 }
 
-const reverse = (array) => [...array].reverse();
+export const reverse = (array) => [...array].reverse();
 
-const makeUniqueMethods = array => {
+export const makeUniqueMethods = array => {
   const list = array.map(transaction => transaction.metadata.method);
   return [...new Set(list)];
 }

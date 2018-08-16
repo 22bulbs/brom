@@ -37,6 +37,32 @@ strong {
   flex-shrink: 0;
 }
 
+.tooltip {
+  display: none;
+  background-color: #212024;
+  color: white;
+  position: absolute;
+  top: -30px;
+  left: -50px;
+  white-space: nowrap;
+  z-index: 100;
+  padding: .25em .75em;
+  border-radius: 2px;
+}
+
+.icon {
+  position: relative;
+  margin: 0 .25em;
+}
+
+.icon:hover .tooltip {
+  display: block;
+}
+
+#flag-filter {
+  padding: .25em;
+}
+
 #main-container {
   display: flex;
   width: 100%;
@@ -45,6 +71,7 @@ strong {
 #left-hand-side {
   min-width: 50%;
   height: 100vh;
+  border-right: 1px solid black;
 }
 
 #right-hand-side {
@@ -95,11 +122,16 @@ strong {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0 1em;
+  padding: .25em 1em;
 }
 
 #port-bar .labeled-text {
   margin: 0 .25em;
+}
+
+.ports {
+  display: flex;
+  align-items: center;
 }
 
 #brom-title {
@@ -107,7 +139,7 @@ strong {
 }
 
 #transaction-list {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .global-data {
@@ -128,7 +160,7 @@ strong {
 }
 
 .audit-results {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 h1 {
@@ -163,8 +195,17 @@ p {
   justify-content: space-between;
 }
 
-#method-filter, #domain-filter, #flag-filter {
+.item-flags {
+  margin-right: 1.25em;
+}
+
+.filter-flags {
+  margin-right: 1.25em;
+}
+
+#method-filter, #domain-filter{
   border-right: 1px solid black;
+  padding: 0.25em;
 }
 
 #method-filter {
