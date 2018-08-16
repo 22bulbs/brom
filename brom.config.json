@@ -1,0 +1,26 @@
+{
+  "title": "XHR Demo Site",
+  "server":"demo/server.js",
+  "port": 3000,
+  "https": {
+    "key": "../httpsSample/server.key",
+    "cert":"../httpsSample/server.crt"
+  },
+  "defaults": {
+    "automated": false,
+    "browser": "",
+    "https": false,
+    "suppress-gui": false,
+    "do-not-spy": false,
+    "disable-autostart": false,
+    "preserve-caching": false,
+    "write-dir": ""
+  },
+  "proxy-port": 9999,
+  "results-port": 7913,
+  "ignore-rules": [
+  ],
+  "halt-on": [
+    "include-csp"
+  ]
+}
