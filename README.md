@@ -126,3 +126,151 @@ reminders. To turn these off in your config:
   ]
 }
 ```
+
+## API
+
+When writing rules, some headers are tougher to parse, so brom provides
+a simple set of header parsers.
+
+### brom(object)
+
+Returns a new object, with `Content-Security-Policy`, `Feature-Policy`,
+`Set-Cookie`, and `Cookie` headers parsed. All other headers are left
+unchanged under a single `headers` key.
+
+```javascript
+const parse = require('brom');
+parse({
+  'Content-Security-Policy': "default-src 'self'; img-src *; media-src media1.com media2.com; script-src userscripts.example.com",
+  'Feature-Policy': "vibrate 'none'; geolocation 'none'",
+  'Cookie': 'hello=world; foo=bar;',
+  'Set-Cookie': 'a=b; Path=/; HttpOnly;',
+  'Content-Type': 'text/html; charset=utf-8',
+  'Content-Length': '7913'
+});
+
+// {
+//   contentSecurityPolicy: {
+//     'default-src': ['\'self\''],
+//     'img-src': ['*'],
+//     'media-src': ['media1.com', 'media2.com'],
+//     'script-src': ['userscripts.example.com']
+//   },
+//   cookies: [
+//     { name: 'hello', value: 'world' },
+//     { name: 'foo', value: 'bar' }
+//   ],
+//   featurePolicy: {
+//     vibrate: ['\'none\''],
+//     geolocation: ['\'none\'']
+//   },
+//   setCookie: [
+//     {
+//       name: 'a',
+//       value: 'b',
+//       Path: '/',
+//       'Max-Age': '0',
+//       Secure: true,
+//       HttpOnly: true
+//     }
+//   ],
+//   headers: {
+//     'Content-Type': 'text/html; charset=utf-8',
+//     'Content-Length': '7913'
+//   }
+// }
+```
+
+The **headers** object you pass in can contain any number of headers. Each
+key should be a header name (everything up to the `:`), and its
+corresponding value the remainder of that header string.
+
+The only exception to this rule is your `Set-Cookie` header, which may be
+either a string (representing a single cookie) or an array of strings
+representing multiple cookies.
+
+### brom.contentSecurityPolicy(string)
+
+Parses a CSP value and returns an object, with each directive name as
+a key and each directive value as an array of strings.
+
+The **value** string must be the actual header value (everything after the
+`:`).
+
+### brom.csp(string)
+
+Alias for `brom.contentSecurityPolicy`.
+
+```javascript
+brom.csp("default-src 'self'; img-src *; script-src userscripts.example.com");
+
+// {
+//   'default-src': ['\'self\''],
+//   'img-src': ['*'],
+//   'script-src': ['userscripts.example.com']
+// }
+```
+
+### brom.featurePolicy(string)
+
+Parses a Feature Policy value and returns an object. Each key is
+a feature, and its value an array of whitelisted domains.
+
+The **value** string must be the actual header value (everything after the
+`:`).
+
+### brom.fp(string)
+
+Alias for `brom.featurePolicy`.
+
+```javascript
+brom.fp("vibrate 'none'; geolocation 'none'");
+
+// {
+//   vibrate: ['\'none\''],
+//   geolocation: ['\'none\'']
+// }
+```
+
+### brom.cookie(string)
+
+Parses a `Cookie` value and returns an array of cookies. The cookie name and
+value are separated into `name` and `value` keys.
+
+The **value** string must be the actual header value (everything after the
+`:`).
+
+```javascript
+brom.cookie('hello=world; foo=bar;');
+
+// [
+//   { name: 'hello', value: 'world' },
+//   { name: 'foo', value: 'bar' }
+// ]
+```
+
+### brom.setCookie(string)
+
+Parses a `Set-Cookie` value and returns an object. The cookie name and
+value are separated into `name` and `value` keys; the rest are separated
+into key-value pairs (non-value directives like "Secure" are set to
+`true`).
+
+The **value** string must be the actual header value (everything after the
+`:`).
+
+```javascript
+brom.setCookie('a=b; Path=/; Max-Age=0; Secure; HttpOnly');
+
+// [
+//   {
+//     name: 'a',
+//     value: 'b',
+//     Path: '/',
+//     'Max-Age': '0',
+//     Secure: true,
+//     HttpOnly: true
+//   }
+// ]
+```
+

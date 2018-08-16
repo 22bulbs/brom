@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DetailsAccordion = ({ textObject, id }) => (
+const WarningsAccordion = ({ textObject, id }) => (
   <div id={id}>
     {
       Object.keys(textObject).map(el => (
@@ -8,7 +8,7 @@ const DetailsAccordion = ({ textObject, id }) => (
           key={el}
           className="flex-row key-value-display"
         >
-          <div style={{ marginRight: '.5em' }}>
+          <div style={{ whiteSpace: 'nowrap', marginRight: '1em' }}>
             <p><strong>{el}:</strong></p>
           </div>
           <div>
@@ -20,4 +20,5 @@ const DetailsAccordion = ({ textObject, id }) => (
   </div>
 );
 
-export default DetailsAccordion;
+export default WarningsAccordion;
+

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DetailsTransactionSummary from '../components/DetailsTransactionSummary.jsx';
 import DetailsRequestContainer from './DetailsRequestContainer.jsx';
 import DetailsResponseContainer from './DetailsResponseContainer.jsx';
-import WarningsAccordion from '../components/DetailsAccordion';
+import WarningsAccordion from '../components/WarningsAccordion';
 
 
 const mapStateToProps = state => ({
