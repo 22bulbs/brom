@@ -15,8 +15,10 @@ const TransactionFilterBar = ({
   onDomainClick,
   onFlagClick,
   methods,
+  selectedFlags,
+  selectedDomain
 }) => (
-  <div className="flex-row space-between">
+  <div className="flex-row space-between transaction-filter light-bg">
     <div className="flex-row">
       <div id="method-filter">
         <select
@@ -29,20 +31,28 @@ const TransactionFilterBar = ({
         </select>
       </div>
       <div id="domain-filter">
-        <span onClick={() => onDomainClick(false)}>
-          <Icon flag="internal" />
+        <span style={{
+          color: selectedDomain === true || null ? "#BFB7AC" : "#fff4e5"
+        }} onClick={() => onDomainClick(false)}>
+          <Icon tooltip flag="internal" />
         </span>
-        <span onClick={() => onDomainClick(true)}>
-          <Icon flag="external" />
+        <span style={{
+          color: selectedDomain === false || null ? "#BFB7AC" : "#fff4e5"
+        }} onClick={() => onDomainClick(true)}>
+          <Icon tooltip flag="external" />
         </span>
       </div>
     </div>
-    <div id="flag-filter">
-      {flags.map(flag => (
-        <span key={flag} onClick={() => onFlagClick(flag)}>
-          <Icon flag={flag} />
+    <div id="flag-filter" className="filter-flags">
+      {flags.map(flag => {
+        const selectStatus = {
+          color: selectedFlags.includes(flag) ? "#fff4e5" : "#BFB7AC"
+        }
+        return (
+        <span style={selectStatus} key={flag} onClick={() => onFlagClick(flag)}>
+          <Icon  tooltip flag={flag} />
         </span>
-        ))}
+        )})}
     </div>
   </div>
 
