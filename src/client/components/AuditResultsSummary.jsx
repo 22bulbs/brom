@@ -12,6 +12,7 @@ const AuditResultsSummary = ({
   protocol,
   methods,
   totals,
+  socketStatus,
 }) => {
   const methodData = [];
   for (const method in methods) {
@@ -23,7 +24,7 @@ const AuditResultsSummary = ({
 
   return title ? (
     <div className="audit-results">
-      <PortBar {...ports} />
+      <PortBar {...ports} socketStatus={socketStatus}/>
       <div className="title-info">
         <h1 id="app-title">{title}</h1>
         <p>

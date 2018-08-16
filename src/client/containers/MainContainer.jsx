@@ -30,7 +30,6 @@ const mapDispatchToProps = {
 const MainContainer = ({ transactions, selectedTransactionIndex, globalData, socketStatus }) => {
 
   const selectedTransaction = transactions[selectedTransactionIndex];
-
   return (
     <div id='main-container'>
       <div className='flex-column' id='left-hand-side'>

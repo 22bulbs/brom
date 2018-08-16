@@ -1,3 +1,4 @@
+
 body {
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 12px;
@@ -66,12 +67,13 @@ strong {
 #main-container {
   display: flex;
   width: 100%;
+  min-width: 1100px;
 }
 
 #left-hand-side {
   min-width: 50%;
   height: 100vh;
-  border-right: 1px solid black;
+  border-right: 1px solid #69686f;
 }
 
 #right-hand-side {
@@ -83,6 +85,7 @@ strong {
   display: flex;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #details-transaction-summary {
@@ -99,7 +102,7 @@ strong {
 
 #warnings-accordion {
   padding: .5em;
-  border-bottom: 1px black solid;
+  border-bottom: 1px #69686f solid;
 }
 
 #details-response-container {
@@ -160,7 +163,7 @@ strong {
 }
 
 .audit-results {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #69686f;
 }
 
 h1 {
@@ -204,12 +207,12 @@ p {
 }
 
 #method-filter, #domain-filter{
-  border-right: 1px solid black;
+  border-right: 1px solid #69686f;
   padding: 0.25em;
 }
 
 #method-filter {
-  border-left: 1px solid black;
+  border-left: 1px solid #69686f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,15 +229,20 @@ p {
 }
 
 .border-bottom {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #69686f;
 }
 
 .border-right {
-  border-right: 1px solid black;
+  border-right: 1px solid #69686f;
 }
 
 .simple-accordion {
   padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.simple-accordion p {
+  word-wrap: break-word;
 }
 
 .cookies, .set-cookie, .fp, .csp {

@@ -15,7 +15,7 @@ const PortBar = ({ app, proxy, results, socketStatus }) => (
         <LabeledText label="Results Port" text={results} />
       </span>
       <span style={{
-        color: 'green'
+        color: socketStatus ? '#92CC98' : '#D15F5C'
       }}>
         <Icon flag="connected" />
       </span>
