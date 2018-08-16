@@ -8,6 +8,7 @@ const reducer = combineReducers({
   selectedTransactionIndex: reducers.selectedTransactionIndex,
   transactionFlagFilter: reducers.transactionFlagFilter,
   transactionDomainFilter: reducers.transactionDomainFilter,
+  socketStatus: reducers.socketStatus,
   globalData: globalDataReducer
 })
 
