@@ -2,7 +2,7 @@ import React from 'react';
 import LabeledText from './LabeledText';
 import Icon from './Icon';
 
-const PortBar = ({ app, proxy, results }) => (
+const PortBar = ({ app, proxy, results, socketStatus }) => (
   <div id="port-bar">
     <span id="brom-title">brom</span>
     <div>

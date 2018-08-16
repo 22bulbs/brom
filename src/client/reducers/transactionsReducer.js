@@ -61,3 +61,12 @@ export const transactionDomainFilter = (state = null, action) => {
   }
 }
 
+export const socketStatus = (state = false, action) => {
+  switch (action.type) {
+    case types.SET_SOCKET_STATUS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+

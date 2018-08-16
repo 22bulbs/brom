@@ -7,27 +7,34 @@ import DetailsTransactionSummary from '../components/DetailsTransactionSummary.j
 import { addTransaction } from '../actions/actions';
 
 
-// will add new 'meta' key on state, and definitely pass as props into this container later
-const mapStateToProps = state => ({
-  transactions: state.transactions,
-  selectedTransactionIndex: state.selectedTransactionIndex,
-  globalData: state.globalData
+const mapStateToProps = ({
+  transactions,
+  selectedTransactionIndex,
+  globalData,
+  socketStatus
+ }) => ({
+  transactions,
+  selectedTransactionIndex,
+  globalData,
+  socketStatus,
 });
 
-const mapDispatchToProps = dispatch => ({
-  addTransaction: requestName => dispatch(addTransaction(requestName))
-});
+// const mapDispatchToProps = dispatch => ({
+//   addTransaction: requestName => dispatch(addTransaction(requestName))
+// });
 
+const mapDispatchToProps = {
+  addTransaction,
+}
 
-
-const MainContainer = ({ transactions, selectedTransactionIndex, globalData }) => {
+const MainContainer = ({ transactions, selectedTransactionIndex, globalData, socketStatus }) => {
 
   const selectedTransaction = transactions[selectedTransactionIndex];
 
   return (
     <div id='main-container'>
       <div className='flex-column' id='left-hand-side'>
-        <AuditResultsSummary {...globalData} />
+        <AuditResultsSummary {...globalData} socketStatus={socketStatus} />
         <TransactionListContainer />
       </div>
       <div className='flex-column' id='right-hand-side'>
