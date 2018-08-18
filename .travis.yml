@@ -1,4 +1,4 @@
-install: npm ci
+install: npm i
 script: 
   - npm run prod
   
