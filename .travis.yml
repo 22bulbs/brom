@@ -1,4 +1,8 @@
-install: npm i
+
+language: node_js
+node_js: 
+  - "stable"
+install: npm ci
 script: 
   - npm run prod
   
