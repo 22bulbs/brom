@@ -21,12 +21,15 @@ Get your headers in order _before_ deployment.
 ## Demo
 
 This repository has a built-in brom config, so just clone, install, and
-run to see brom in action.
+run to see brom in action. You'll need Node 6.4.0 or later, and npm.
 
 1. Clone this repository locally
-2. `npm install`
-3. `brom` (you'll need to install this globally, or on Unix-y systems you
-   can simply run `lib/index.js`)
+2. In the root directory, `npm install`
+3. `npm install -g brom`
+4. `brom`
+5. brom will open the GUI in your default browser automatically. Open
+   a second tab and navigate to localhost:9999 to start making/recording
+   requests.
 
 ## Usage
 
