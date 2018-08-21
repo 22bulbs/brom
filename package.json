@@ -1,6 +1,6 @@
 {
   "name": "brom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./lib/utils/parse-headers.js",
   "scripts": {
