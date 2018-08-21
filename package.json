@@ -3,6 +3,15 @@
   "version": "1.0.2",
   "description": "",
   "main": "./lib/utils/parse-headers.js",
+  "homepage": "https://brom.horse",
+  "keywords": [
+    "http",
+    "utility",
+    "testing",
+    "ci",
+    "continuous",
+    "integration"
+  ],
   "scripts": {
     "test": "jest --coverage",
     "testwatch": "jest --watch",
