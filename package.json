@@ -1,8 +1,17 @@
 {
   "name": "brom",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
   "main": "./lib/utils/parse-headers.js",
+  "homepage": "https://www.brom.horse",
+  "keywords": [
+    "http",
+    "utility",
+    "testing",
+    "ci",
+    "continuous",
+    "integration"
+  ],
   "scripts": {
     "test": "jest --coverage",
     "testwatch": "jest --watch",
