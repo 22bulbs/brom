@@ -112,3 +112,16 @@ describe('globalDataReducer reducer', () => {
     expect(globalDataReducer({}, action)).toEqual(global);
   });
 });
+
+describe('socketStatus reducer', () => {
+  test('should set socket status to false when socket is not connected', () => {
+    expect(reducers.socketStatus(false, defaultCase)).toEqual(false);
+  });
+  test('should set socket status to true when socket connects', () => {
+    const action = {
+      type: 'SET_SOCKET_STATUS',
+      payload: true
+    }
+    expect(reducers.socketStatus(false, action)).toEqual(true);
+  })
+})
