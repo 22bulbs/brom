@@ -1,6 +1,6 @@
 {
   "name": "brom",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
   "main": "./lib/utils/parse-headers.js",
   "homepage": "https://github.com/22bulbs/brom#readme",
@@ -58,7 +58,7 @@
   "dependencies": {
     "ajv": "6.5.2",
     "ajv-keywords": "3.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "cookie-parser": "^1.4.3",
